@@ -5,6 +5,7 @@ public class E_PlayerController : MonoBehaviour
 {
     public InputAction MoveAction;
     public InputAction DashAction;
+    public InputAction DigAction;
 
     Vector2 PlayerVector;
     Rigidbody2D rbody;
@@ -21,6 +22,7 @@ public class E_PlayerController : MonoBehaviour
 
         MoveAction.Enable();
         DashAction.Enable();
+        DigAction.Enable();
 
         currentSpeed = 0.0f;
     }
@@ -39,6 +41,33 @@ public class E_PlayerController : MonoBehaviour
         else
         {
             currentSpeed = MoveSpeed;
+        }
+
+        if(DigAction.IsPressed())
+        {
+            Debug.Log("ÌŒ@ƒ{ƒ^ƒ“‰Ÿ‰º");
+        }
+
+        //Œü‚«‚Ì’²®
+        if (PlayerVector.x > 0.0f)
+        {
+            //Debug.Log("‰EˆÚ“®");
+            transform.rotation = Quaternion.Euler(0, 0, 90);
+        }
+        else if (PlayerVector.x < 0.0f)
+        {
+            //Debug.Log("¶ˆÚ“®");
+            transform.rotation = Quaternion.Euler(0, 0, -90);
+        }
+        else if (PlayerVector.y > 0.0f)
+        {
+            //Debug.Log("ãˆÚ“®");
+            transform.rotation = Quaternion.Euler(0, 0, -180);
+        }
+        else if (PlayerVector.y < 0.0f)
+        {
+            //Debug.Log("‰ºˆÚ“®");
+            transform.rotation = Quaternion.Euler(0, 0, 0);
         }
     }
 
