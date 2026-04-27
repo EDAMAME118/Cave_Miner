@@ -1,8 +1,12 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class E_PlayerController : MonoBehaviour
 {
+    public Text BlockText;
+
     public InputAction MoveAction;
     public InputAction DashAction;
     public InputAction DigAction;
@@ -43,10 +47,7 @@ public class E_PlayerController : MonoBehaviour
             currentSpeed = MoveSpeed;
         }
 
-        if(DigAction.IsPressed())
-        {
-            Debug.Log("採掘ボタン押下");
-        }
+        
 
         //向きの調整
         if (PlayerVector.x > 0.0f)
@@ -75,5 +76,24 @@ public class E_PlayerController : MonoBehaviour
     {
         //Rigidbodyに速度入れる
         rbody.linearVelocity = PlayerVector * currentSpeed;
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Block"))
+        {
+            BlockText.text =
+                "Blockを破壊する：Zボタン";
+            Debug.Log("Blockに接触中");
+            if (DigAction.IsPressed())
+            {
+                Debug.Log("破壊");
+                Destroy(collision.gameObject);
+            }
+        }
+        else
+        {
+            BlockText.text = "";
+        }
     }
 }
