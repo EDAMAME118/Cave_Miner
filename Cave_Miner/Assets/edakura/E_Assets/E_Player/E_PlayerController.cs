@@ -18,6 +18,7 @@ public class E_PlayerController : MonoBehaviour
 
     [SerializeField]
     float currentSpeed;
+    float digSpeed = 5.0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -87,8 +88,18 @@ public class E_PlayerController : MonoBehaviour
             Debug.Log("Block‚ÉÚG’†");
             if (DigAction.IsPressed())
             {
-                Debug.Log("”j‰ó");
-                Destroy(collision.gameObject);
+                Debug.Log("”j‰ó’†");
+                digSpeed -= 0.1f;
+                if(digSpeed < 0.0f)
+                {
+                    Destroy(collision.gameObject);
+                    Debug.Log("”j‰óŠ®—¹");
+                    digSpeed = 5.0f;
+                }
+            }
+            else
+            {
+                digSpeed = 5.0f;
             }
         }
         else
