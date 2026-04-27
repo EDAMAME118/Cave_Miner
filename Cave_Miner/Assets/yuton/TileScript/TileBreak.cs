@@ -1,0 +1,32 @@
+using UnityEngine;
+using UnityEngine.Tilemaps;
+//public class NewMonoBehaviourScript : MonoBehaviour
+//{
+//    [SerializeField] Tilemap  tilemap;
+//    [SerializeField] TileBase tile;
+//    [SerializeField] Vector3Int position;
+//    // Start is called once before the first execution of Update after the MonoBehaviour is created
+//    void Start()
+//    {
+//        tilemap.SetTile(position, null);
+//    }
+
+//    // Update is called once per frame
+//    void Update()
+//    {
+        
+//    }
+    public class TilemapController : MonoBehaviour
+{
+        public Tilemap tilemap;
+        public Sprite sprite;
+
+        public void replaceTilemap()
+        {
+            foreach (var pos in tilemap.cellBounds.allPositionsWithin)
+            {
+                // âΩÇ©ÇÃèàóù
+            }
+        }
+        //allPositionsWithinÇ±Ç±Ç…îjâÛîÕàÕÇì¸ÇÍÇÍÇŒÇÌÇÒÇøÇ·ÇÒÇ¢ÇØÇÈÇ©Ç‡
+    }
