@@ -1,32 +1,27 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
-//public class NewMonoBehaviourScript : MonoBehaviour
-//{
-//    [SerializeField] Tilemap  tilemap;
-//    [SerializeField] TileBase tile;
-//    [SerializeField] Vector3Int position;
-//    // Start is called once before the first execution of Update after the MonoBehaviour is created
-//    void Start()
-//    {
-//        tilemap.SetTile(position, null);
-//    }
 
-//    // Update is called once per frame
-//    void Update()
-//    {
-        
-//    }
-    public class TilemapController : MonoBehaviour
+public class MiningArea : MonoBehaviour
 {
-        public Tilemap tilemap;
-        public Sprite sprite;
+    public Tilemap tilemap;
 
-        public void replaceTilemap()
+    private void OnTriggerStay2D(Collider2D col)
+    {
+        if (Input.GetMouseButton(0)) //クリック中に採掘
         {
-            foreach (var pos in tilemap.cellBounds.allPositionsWithin)
+            //接触している位置を取得
+            Vector3 hitPos = col.ClosestPoint(transform.position);
+
+            //タイル座標に変換
+            Vector3Int cellPos = tilemap.WorldToCell(hitPos);
+
+            //タイルがあれば削除
+            if (tilemap.HasTile(cellPos))
             {
-                // 何かの処理
+                tilemap.SetTile(cellPos, null);
             }
         }
-        //allPositionsWithinここに破壊範囲を入れればわんちゃんいけるかも
     }
+}
+//HasTile　指定した座標にタイルが存在するか確認する関数
+//
