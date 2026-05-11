@@ -10,13 +10,15 @@ public class ScoreManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        score = 0;
-        totalScore = 0;
+        DontDestroyOnLoad(this.gameObject);
+
+        score = 10000;
+        totalScore = 10000;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(score);
+        
     }
 }

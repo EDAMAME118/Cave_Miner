@@ -13,12 +13,15 @@ public class E_PlayerController : MonoBehaviour
 
     Vector2 PlayerVector;
     Rigidbody2D rbody;
-    public float MoveSpeed = 5.0f;
+    public static float MoveSpeed = 5.0f;
     public float DashMultiplier = 1.5f;
 
     [SerializeField]
     float currentSpeed;
-    float digSpeed = 5.0f;
+
+
+    public static float digSpeed = 5.0f;
+    public static float digRange = 5.0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
