@@ -482,6 +482,7 @@ MonoBehaviour:
   SpeedLevelText: {fileID: 34784412}
   RangeLevelText: {fileID: 847861378}
   ScoreText: {fileID: 1307418271}
+  nextSceneName: E_CaveStageScene
 --- !u!4 &262315429
 Transform:
   m_ObjectHideFlags: 0
