@@ -1,6 +1,7 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class E_UpgradeScript : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class E_UpgradeScript : MonoBehaviour
     public Text RangeLevelText;
 
     public Text ScoreText;
+
+    public string nextSceneName;
 
     //アップグレードに必要なスコア変数(強化毎に上昇)
     private int DiggingScore;
@@ -164,8 +167,9 @@ public class E_UpgradeScript : MonoBehaviour
             //移動時自身をfalseにする
             this.gameObject.SetActive(false);
             //シーン移動
-            
+            SceneManager.LoadScene(nextSceneName);
         }
+
     }
 
     /// <summary>
@@ -177,4 +181,5 @@ public class E_UpgradeScript : MonoBehaviour
         NotifyText.text = NText;
         notifyTimer = DisplayDuration;
     }
+
 }
