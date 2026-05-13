@@ -19,7 +19,9 @@ public class TestScoreADD : MonoBehaviour
 
         if(Keyboard.current.spaceKey.wasPressedThisFrame)
         {
+            ScoreManager.dayScore += 100;
             ScoreManager.score += 100;
+            ScoreManager.totalScore += 100;
         }
     }
 }
