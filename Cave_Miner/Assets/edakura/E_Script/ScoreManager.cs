@@ -5,8 +5,8 @@ public class ScoreManager : MonoBehaviour
     public static int score;
     public static int miningCount;
 
-    private int totalScore;
-    private int totalMiningCount;
+    public static int totalScore;
+    public static int totalMiningCount;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
