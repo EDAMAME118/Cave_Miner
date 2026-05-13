@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class E_UpgradeScript : MonoBehaviour
 {
-
     //各種テキスト表示用変数
     public Text DiggingText;
     public Text SpeedText;
@@ -28,6 +27,10 @@ public class E_UpgradeScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //その日得たスコアと採掘数を初期化
+        ScoreManager.dayMiningCount = 0;
+        ScoreManager.dayScore = 0;
+
         //強化時表示されるテキストを空にしておく
         NotifyText.text = $"";
     }
