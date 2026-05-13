@@ -12,6 +12,14 @@ public class PlayerDataManager : MonoBehaviour
     public static int DiggingLevel = 1;
     public static int SpeedLevel   = 1;
     public static int RangeLevel   = 1;
+
+    //プレイヤーステータス
+    public static float playerDigSpeed;
+    public static float playerSpeed;
+
+    public static float squareSizex = 0f;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {

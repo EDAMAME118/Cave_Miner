@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
+    public static int dayScore;
     public static int score;
+    public static int dayMiningCount;
     public static int miningCount;
 
     public static int totalScore;
@@ -12,6 +14,9 @@ public class ScoreManager : MonoBehaviour
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+
+        dayScore = 0;
+        dayMiningCount = 0;
 
         score = 0;
         totalScore = 0;

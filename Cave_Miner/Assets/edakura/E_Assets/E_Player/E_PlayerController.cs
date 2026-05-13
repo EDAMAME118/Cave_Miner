@@ -52,6 +52,7 @@ public class E_PlayerController : MonoBehaviour
         }
 
         
+        
 
         //Œü‚«‚Ì’²®
         if (PlayerVector.x > 0.0f)

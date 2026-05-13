@@ -39,7 +39,7 @@ public class E_TimeLimit : MonoBehaviour
         //1•bŒo‰ß
         if(timeInterval >= 1.0f)
         {
-            //§ŒÀŠÔ‚PŒ¸‚ç‚·
+            //§ŒÀŠÔ‚PŒ¸‚ç‚·                                      
             TimeLimit--;
             //‚P•bŒv‘ª•Ï”‚ğ‚à‚Æ‚É–ß‚·
             timeInterval -= 1.0f;
