@@ -385,7 +385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c9606735986d1a4db995d4d83a10a2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::E_TimeLimit
-  TimeLimit: 60
+  TimeLimit: 5
   timeText: {fileID: 464275369}
   nextSceneBuy: E_BuyScene
 --- !u!4 &1096279536

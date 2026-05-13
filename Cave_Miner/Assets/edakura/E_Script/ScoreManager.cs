@@ -3,22 +3,17 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     public static int score;
-
+    public static int miningCount;
 
     private int totalScore;
+    private int totalMiningCount;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
 
-        score = 10000;
-        totalScore = 10000;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        score = 0;
+        totalScore = 0;
     }
 }
