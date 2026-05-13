@@ -1,39 +1,77 @@
 ﻿using UnityEngine;
+
+using UnityEngine.InputSystem;
+
 using UnityEngine.Tilemaps;
 
-public class MiningArea : MonoBehaviour
+public class TileRangeDestroyer : MonoBehaviour
+
 {
-    private Collider2D currentBlock;
-    //範囲に入ったブロックの位置情報取得
-    private void OnTriggerEnter2D(Collider2D col)
+
+    public Tilemap targetTilemap;
+
+    // この関数を呼び出すと、オブジェクトのColliderの範囲内のタイルを消去します
+
+    public void DestroyTilesInBounds()
+
     {
-        if (col.CompareTag("Block"))
+
+        // 1. オブジェクトに付いているColliderの範囲(Bounds)を取得
+
+        Bounds bounds = GetComponent<Collider2D>().bounds;
+
+        // 2. Boundsの最小値と最大値をタイルマップの格子座標(Vector3Int)に変換
+
+        Vector3Int minCell = targetTilemap.WorldToCell(bounds.min);
+
+        Vector3Int maxCell = targetTilemap.WorldToCell(bounds.max);
+
+        // 3. X軸とY軸でループを回して、範囲内の全座標をチェック
+
+        for (int x = minCell.x; x <= maxCell.x; x++)
+
         {
-            currentBlock = col;
+
+            for (int y = minCell.y; y <= maxCell.y; y++)
+
+            {
+
+                Vector3Int targetPos = new Vector3Int(x, y, 0);
+
+                // 4. その場所にタイルがあるか確認し、あれば削除
+
+                if (targetTilemap.HasTile(targetPos))
+
+                {
+
+                    targetTilemap.SetTile(targetPos, null);
+
+                }
+
+            }
+
         }
-    }
-    //範囲から離れたら破壊時間リセット
-    private void OnTriggerExit2D(Collider2D col)
-    {
-        if (col == currentBlock)
-        {
-            currentBlock = null;
-        }
+
     }
 
-    private void Update()
+    // テスト用：スペースキーを押したら実行
+
+    void Update()
+
     {
-        //Zを押しているかの判定
-        if (Input.GetKey(KeyCode.Z))
+
+        if (Keyboard.current.zKey.wasPressedThisFrame)
+
         {
-            //Zを押しているときに採掘範囲に入ると一定時間で壊せる
-            if (currentBlock != null)
-            {
-                Destroy(currentBlock.gameObject);
-            }
+
+            DestroyTilesInBounds();
+
         }
+
     }
+
 }
+
 //HasTile　指定した座標にタイルが存在するか確認する関数
 
 //2
