@@ -15,5 +15,8 @@ public class ScoreManager : MonoBehaviour
 
         score = 0;
         totalScore = 0;
+
+        miningCount = 0;
+        totalMiningCount = 0;
     }
 }
