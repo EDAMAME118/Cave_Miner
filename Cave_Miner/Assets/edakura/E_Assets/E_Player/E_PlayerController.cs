@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class E_PlayerController : MonoBehaviour
 {
-    public Text BlockText;
+    //public Text BlockText;
 
     public InputAction MoveAction;
     public InputAction DashAction;
@@ -87,8 +87,8 @@ public class E_PlayerController : MonoBehaviour
     {
         if(collision.CompareTag("Block"))
         {
-            BlockText.text =
-                "Blockを破壊する：Zボタン";
+            //BlockText.text =
+            //    "Blockを破壊する：Zボタン";
             Debug.Log("Blockに接触中");
             if (DigAction.IsPressed())
             {
@@ -108,7 +108,7 @@ public class E_PlayerController : MonoBehaviour
         }
         else
         {
-            BlockText.text = "";
+            //BlockText.text = "";
         }
     }
 }
