@@ -17,7 +17,8 @@ public class PlayerDataManager : MonoBehaviour
     public static float playerDigSpeed;
     public static float playerSpeed;
 
-    public static float squareSizex = 0f;
+    Vector2 miningRange = Vector2.zero;
+    Vector2 miningRangeOffset = Vector2.zero;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -27,5 +28,10 @@ public class PlayerDataManager : MonoBehaviour
 
         playerDigSpeed = 0f;
         playerSpeed = 5f;
+
+        //mining‚É(1,1)“ü‚ê‚Ä‚¨‚­ miningSize‚ª1‘‚¦‚½‚çminingOffset‚ğ-0.5‚µ‚È‚¯‚ê‚Î‚È‚ç‚È‚¢
+        miningSize = Vector2.one;
+        
+
     }
 }

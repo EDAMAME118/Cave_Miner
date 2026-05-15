@@ -19,14 +19,17 @@ public class E_PlayerController : MonoBehaviour
     [SerializeField]
     float currentSpeed;
 
+    private Vector2 miningRange;
+    private Vector2 miningRangeOffset;
 
-    public static float digSpeed = 5.0f;
-    public static float digRange = 5.0f;
+    private BoxCollider2D miningCollider;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rbody = GetComponent<Rigidbody2D>();
+
+        //miningCollider = transform.Find("MiningRange").transform;
 
         MoveAction.Enable();
         DashAction.Enable();
