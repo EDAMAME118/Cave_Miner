@@ -26,6 +26,6 @@ public class PlayerDataManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
 
         playerDigSpeed = 0f;
-        playerSpeed = 0f;
+        playerSpeed = 5f;
     }
 }
