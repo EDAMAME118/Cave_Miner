@@ -765,7 +765,7 @@ GameObject:
   - component: {fileID: 1121270819}
   - component: {fileID: 1121270818}
   m_Layer: 0
-  m_Name: Square
+  m_Name: MiningRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -830,7 +830,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 5, y: 5}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &1121270819
 MonoBehaviour:
