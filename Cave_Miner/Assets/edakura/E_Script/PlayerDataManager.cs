@@ -24,5 +24,8 @@ public class PlayerDataManager : MonoBehaviour
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+
+        playerDigSpeed = 0f;
+        playerSpeed = 0f;
     }
 }

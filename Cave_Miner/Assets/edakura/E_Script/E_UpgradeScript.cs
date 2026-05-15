@@ -78,7 +78,7 @@ public class E_UpgradeScript : MonoBehaviour
                 //必要スコアを上昇
                 PlayerDataManager.DiggingScore += 100;
                 //プレイヤーの採掘速度を上昇
-                E_PlayerController.digSpeed += 0.5f;
+                PlayerDataManager.playerDigSpeed += 0.5f;
                 //レベル上昇
                 PlayerDataManager.DiggingLevel += 1;
 
@@ -102,7 +102,7 @@ public class E_UpgradeScript : MonoBehaviour
                 //必要スコアを上昇
                 PlayerDataManager.SpeedScore += 100;
                 //プレイヤーの移動速度を上昇
-                E_PlayerController.MoveSpeed += 0.5f;
+                PlayerDataManager.playerSpeed += 0.5f;
                 //レベル上昇
                 PlayerDataManager.SpeedLevel += 1;
 

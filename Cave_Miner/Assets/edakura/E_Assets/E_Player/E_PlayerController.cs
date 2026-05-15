@@ -44,11 +44,11 @@ public class E_PlayerController : MonoBehaviour
         //ƒ_ƒbƒVƒ…ƒ{ƒ^ƒ“‰Ÿ‚³‚ê‚Ä‚é‚È‚çˆÚ“®‘¬“xã¸
         if(DashAction.IsPressed())
         {
-            currentSpeed = MoveSpeed * DashMultiplier;
+            currentSpeed = PlayerDataManager.playerSpeed * DashMultiplier;
         }
         else
         {
-            currentSpeed = MoveSpeed;
+            currentSpeed = PlayerDataManager.playerSpeed;
         }
 
         
@@ -85,30 +85,30 @@ public class E_PlayerController : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.CompareTag("Block"))
-        {
-            //BlockText.text =
-            //    "Block‚ğ”j‰ó‚·‚éFZƒ{ƒ^ƒ“";
-            Debug.Log("Block‚ÉÚG’†");
-            if (DigAction.IsPressed())
-            {
-                Debug.Log("”j‰ó’†");
-                digSpeed -= 0.1f;
-                if(digSpeed < 0.0f)
-                {
-                    Destroy(collision.gameObject);
-                    Debug.Log("”j‰óŠ®—¹");
-                    digSpeed = 5.0f;
-                }
-            }
-            else
-            {
-                digSpeed = 5.0f;
-            }
-        }
-        else
-        {
-            //BlockText.text = "";
-        }
+        //if(collision.CompareTag("Block"))
+        //{
+        //    //BlockText.text =
+        //    //    "Block‚ğ”j‰ó‚·‚éFZƒ{ƒ^ƒ“";
+        //    Debug.Log("Block‚ÉÚG’†");
+        //    if (DigAction.IsPressed())
+        //    {
+        //        Debug.Log("”j‰ó’†");
+        //        digSpeed -= 0.1f;
+        //        if(digSpeed < 0.0f)
+        //        {
+        //            Destroy(collision.gameObject);
+        //            Debug.Log("”j‰óŠ®—¹");
+        //            digSpeed = 5.0f;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        digSpeed = 5.0f;
+        //    }
+        //}
+        //else
+        //{
+        //    //BlockText.text = "";
+        //}
     }
 }
