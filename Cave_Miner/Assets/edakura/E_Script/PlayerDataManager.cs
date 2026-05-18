@@ -26,7 +26,7 @@ public class PlayerDataManager : MonoBehaviour
     {
         DontDestroyOnLoad(this.gameObject);
 
-        playerDigSpeed = 0f;
+        playerDigSpeed = 1.0f;
         playerSpeed = 5f;
 
         //mining‚É(1,1)“ü‚ê‚Ä‚¨‚­ miningSize‚ª1‘‚¦‚½‚çminingOffset‚ğ-0.5‚µ‚È‚¯‚ê‚Î‚È‚ç‚È‚¢
