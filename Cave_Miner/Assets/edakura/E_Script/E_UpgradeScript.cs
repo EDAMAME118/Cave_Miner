@@ -127,7 +127,7 @@ public class E_UpgradeScript : MonoBehaviour
                 PlayerDataManager.RangeScore += 100;
                 //ÌŒ@”ÍˆÍã¸
                 PlayerDataManager.miningRange += new Vector2(1, 1);
-                PlayerDataManager.miningRangeOffset -= new Vector2(PlayerDataManager.miningRangeOffset.x, -0.5f);
+                PlayerDataManager.miningRangeOffset -= new Vector2(PlayerDataManager.miningRangeOffset.x, 0.5f);
                 //ƒŒƒxƒ‹ã¸
                 PlayerDataManager.RangeLevel += 1;
 
