@@ -126,7 +126,7 @@ public class E_UpgradeScript : MonoBehaviour
                 //必要スコアを上昇
                 PlayerDataManager.RangeScore += 100;
                 //プレイヤーの移動速度を上昇
-                E_PlayerController.digRange += 0.5f;
+                //E_PlayerController.digRange += 0.5f;
                 //レベル上昇
                 PlayerDataManager.RangeLevel += 1;
 
