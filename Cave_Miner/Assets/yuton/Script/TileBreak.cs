@@ -40,7 +40,7 @@ public class TileRangeDestroyer : MonoBehaviour
                         digProgress[targetPos] = 0f;
                     }
                     // 2. この特定のブロックの採掘時間だけを進める
-                    digProgress[targetPos] += Time.deltaTime+PlayerDataManager.playerDigSpeed;
+                    digProgress[targetPos] += Time.deltaTime*PlayerDataManager.playerDigSpeed;
 
                     // 3. このブロックを破壊するのに必要な時間を判定（デフォルトは3.0秒）
                     float requiredTime = 3.0f;
