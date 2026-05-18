@@ -21,18 +21,9 @@ public class PlayerDataManager : MonoBehaviour
     public static Vector2 miningRange = Vector2.zero;
     public static Vector2 miningRangeOffset = Vector2.zero;
 
-    private BoxCollider2D destroyRange;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        destroyRange = GetComponent<BoxCollider2D>();
-
-        destroyRange.size = miningRange;
-        destroyRange.offset = miningRangeOffset;
-
-        destroyRange.isTrigger = false;
-
         DontDestroyOnLoad(this.gameObject);
 
         playerDigSpeed = 0f;
