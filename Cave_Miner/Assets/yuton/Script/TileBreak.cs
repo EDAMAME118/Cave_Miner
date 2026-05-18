@@ -75,6 +75,7 @@ public class TileRangeDestroyer : MonoBehaviour
                         // 共通のカウントアップ
                         ScoreManager.miningCount++;
                         ScoreManager.totalMiningCount++;
+                        ScoreManager.dayMiningCount++;
 
                         // 5. 破壊が終わったので、この座標のタイマー記憶を削除する
                         digProgress.Remove(targetPos);
