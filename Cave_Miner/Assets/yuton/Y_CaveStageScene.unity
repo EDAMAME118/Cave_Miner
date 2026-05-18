@@ -735,7 +735,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::E_TimeLimit
   TimeLimit: 20
   timeText: {fileID: 464275369}
-  nextSceneBuy: E_BuyScene
+  nextSceneBuy: E_ResultScene
 --- !u!4 &1096279536
 Transform:
   m_ObjectHideFlags: 0
