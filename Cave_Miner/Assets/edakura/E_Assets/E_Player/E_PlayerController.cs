@@ -19,8 +19,8 @@ public class E_PlayerController : MonoBehaviour
     [SerializeField]
     float currentSpeed;
 
-    private Vector2 miningRange;
-    private Vector2 miningRangeOffset;
+    public static Vector2 miningRange;
+    public static Vector2 miningRangeOffset;
 
     private BoxCollider2D miningCollider;
 

@@ -125,8 +125,9 @@ public class E_UpgradeScript : MonoBehaviour
                 ScoreManager.score -= PlayerDataManager.RangeScore;
                 //必要スコアを上昇
                 PlayerDataManager.RangeScore += 100;
-                //プレイヤーの移動速度を上昇
-                //E_PlayerController.digRange += 0.5f;
+                //採掘範囲上昇
+                PlayerDataManager.miningRange += new Vector2(1, 1);
+                PlayerDataManager.miningRangeOffset -= new Vector2(PlayerDataManager.miningRangeOffset.x, -0.5f);
                 //レベル上昇
                 PlayerDataManager.RangeLevel += 1;
 
@@ -142,6 +143,12 @@ public class E_UpgradeScript : MonoBehaviour
             //シーン移動
             SceneManager.LoadScene(nextSceneName);
         }
+
+    }
+
+    //採掘範囲アップグレード
+    void HandleRange()
+    {
 
     }
 
