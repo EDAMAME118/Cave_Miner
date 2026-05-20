@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/edakura/E_TitleScene.unity
+    path: Assets/Scenes/E_TitleScene.unity
     guid: b6ca32bd3a8d29d4490fdb96f797a983
   - enabled: 1
     path: Assets/yuton/Y_CaveStageScene.unity

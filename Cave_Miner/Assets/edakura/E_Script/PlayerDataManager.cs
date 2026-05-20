@@ -4,9 +4,9 @@ public class PlayerDataManager : MonoBehaviour
 {
     // アップグレードに必要なスコア変数(強化毎に上昇)
     // 初期値は100でおいておく
-    public static int DiggingScore = 100;
-    public static int SpeedScore   = 100;
-    public static int RangeScore   = 100;
+    public static int DiggingScore = 500;
+    public static int SpeedScore   = 300;
+    public static int RangeScore   = 10000;
 
     // 各種強化レベル
     // 初期値はLv1でおいておく

@@ -76,9 +76,9 @@ public class E_UpgradeScript : MonoBehaviour
                 //スコアを消費
                 ScoreManager.score -= PlayerDataManager.DiggingScore;
                 //必要スコアを上昇
-                PlayerDataManager.DiggingScore += 100;
+                PlayerDataManager.DiggingScore += 500;
                 //プレイヤーの採掘速度を上昇
-                PlayerDataManager.playerDigSpeed += 0.2f;
+                PlayerDataManager.playerDigSpeed += 0.1f;
                 //レベル上昇
                 PlayerDataManager.DiggingLevel += 1;
 
@@ -100,9 +100,9 @@ public class E_UpgradeScript : MonoBehaviour
                 //スコアを消費
                 ScoreManager.score -= PlayerDataManager.SpeedScore;
                 //必要スコアを上昇
-                PlayerDataManager.SpeedScore += 100;
+                PlayerDataManager.SpeedScore += 300;
                 //プレイヤーの移動速度を上昇
-                PlayerDataManager.playerSpeed += 0.5f;
+                PlayerDataManager.playerSpeed += 0.1f;
                 //レベル上昇
                 PlayerDataManager.SpeedLevel += 1;
 
@@ -124,10 +124,10 @@ public class E_UpgradeScript : MonoBehaviour
                 //スコアを消費
                 ScoreManager.score -= PlayerDataManager.RangeScore;
                 //必要スコアを上昇
-                PlayerDataManager.RangeScore += 100;
+                PlayerDataManager.RangeScore += 20000;
                 //採掘範囲上昇
-                PlayerDataManager.miningRange += new Vector2(1, 1);
-                PlayerDataManager.miningRangeOffset -= new Vector2(PlayerDataManager.miningRangeOffset.x, 0.5f);
+                PlayerDataManager.miningRange += new Vector2(0.5f, 0.5f);
+                PlayerDataManager.miningRangeOffset -= new Vector2(PlayerDataManager.miningRangeOffset.x, 0.25f);
                 //レベル上昇
                 PlayerDataManager.RangeLevel += 1;
 

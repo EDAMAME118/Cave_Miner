@@ -11,8 +11,8 @@ public class E_ShowResult : MonoBehaviour
     void Update()
     {
         showScoreText.text = $"今回の獲得スコア:{ScoreManager.dayScore}\n" +
-                             $"現在のスコア:{ScoreManager.score}";
+                             $"現在の合計スコア:{ScoreManager.score}";
         showMiningCountText.text = $"今回の採掘個数:{ScoreManager.dayMiningCount}\n" +
-                                   $"現在の採掘個数:{ScoreManager.miningCount}";
+                                   $"現在の合計採掘個数:{ScoreManager.miningCount}";
     }
 }
