@@ -31,7 +31,7 @@ public class PlayerDataManager : MonoBehaviour
 
         //mining‚É(1,1)“ü‚ê‚Ä‚¨‚­ miningSize‚ª1‘‚¦‚½‚çminingOffset‚ğ-0.5‚µ‚È‚¯‚ê‚Î‚È‚ç‚È‚¢
         miningRange = new Vector2(0.7f, 0.7f);
-        miningRangeOffset = new Vector2(0, -0.5f);
+        miningRangeOffset = new Vector2(0, -1f);
         
 
     }
