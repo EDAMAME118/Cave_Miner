@@ -6,17 +6,17 @@ using UnityEngine.Tilemaps;
 public class TileRangeDestroyer : MonoBehaviour
 {
     public Tilemap targetTilemap;
-    private BoxCollider2D destroyRange;
+    private Transform destroyRange;
 
     // --- 変更点：ブロックごとの採掘時間を記憶する辞書 ---
     // [タイルの座標, 掘り続けた時間] をセットで保存します
     private Dictionary<Vector3Int, float> digProgress = new Dictionary<Vector3Int, float>();
     void Start()
     {
-        destroyRange = GetComponent<BoxCollider2D>();
+        destroyRange = GetComponent<Transform>();
 
-        destroyRange.size = PlayerDataManager.miningRange;
-        destroyRange.offset = PlayerDataManager.miningRangeOffset;
+        destroyRange.localScale = PlayerDataManager.miningRange;
+        destroyRange.localPosition = PlayerDataManager.miningRangeOffset;
         
     }
     public void DestroyTilesInBounds()
