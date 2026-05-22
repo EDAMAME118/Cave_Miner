@@ -23,6 +23,10 @@ public class E_UpgradeScript : MonoBehaviour
     private float notifyTimer = 0.0f;
     private const float DisplayDuration = 2.0f;
 
+    //サウンド用
+    AudioSource upgradeAudioSource;
+    [SerializeField] private AudioClip upgradeClip;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -33,6 +37,8 @@ public class E_UpgradeScript : MonoBehaviour
 
         //強化時表示されるテキストを空にしておく
         NotifyText.text = $"";
+
+        upgradeAudioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -69,6 +75,8 @@ public class E_UpgradeScript : MonoBehaviour
             if(ScoreManager.score < PlayerDataManager.DiggingScore )
             {
                 ShowNotify($"スコアが足りません");
+                //アップグレード失敗SE
+                upgradeAudioSource.PlayOneShot(upgradeClip);
             }
             //スコアが足りる場合
             else
@@ -93,6 +101,9 @@ public class E_UpgradeScript : MonoBehaviour
             if(ScoreManager.score < PlayerDataManager.SpeedScore)
             {
                 ShowNotify($"スコアが足りません");
+                //アップグレード失敗SE
+                upgradeAudioSource.PlayOneShot(upgradeClip);
+
             }
             //スコアが足りる場合
             else
@@ -117,6 +128,9 @@ public class E_UpgradeScript : MonoBehaviour
             if (ScoreManager.score < PlayerDataManager.RangeScore)
             {
                 ShowNotify($"スコアが足りません");
+                //アップグレード失敗SE
+                upgradeAudioSource.PlayOneShot(upgradeClip);
+
             }
             //スコアが足りる場合
             else
