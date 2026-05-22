@@ -7,19 +7,25 @@ public class E_TitleSceneChanger : MonoBehaviour
     //シーン名を決める
     public string nextScene = "NextScene";
 
+    //Enter時効果音
+    [SerializeField] private AudioClip titleEnterClip;
+
+    void Start()
+    {
+  
+    }
+
     // Update is called once per frame
     void Update()
     {
         //Enterキー押下時
         if(Keyboard.current.enterKey.wasPressedThisFrame)
         {
+            //音声を流す
+            SoundPlayer.Instance.PlaySound(titleEnterClip);
             //シーン移動
             SceneManager.LoadScene(nextScene);
-        }
-
-        if(Keyboard.current.escapeKey.wasPressedThisFrame)
-        {
-
+            
         }
 
         // Escapeキーが押されたらゲーム終了
