@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b120615209ffe6468acd7c78d86f7d6, type: 3}
   m_Name: StoneTile3
   m_EditorClassIdentifier: Assembly-CSharp::ScoreTile
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -1206985255773456235, guid: 53f583c4b65ff0648afdd05a63bf733f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

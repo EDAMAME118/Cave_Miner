@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b120615209ffe6468acd7c78d86f7d6, type: 3}
-  m_Name: StoneTile2
+  m_Name: StoneTile4
   m_EditorClassIdentifier: Assembly-CSharp::ScoreTile
-  m_Sprite: {fileID: -1915320724490040291, guid: e19d2a20375d5ce4eafe505dd074dd59, type: 3}
+  m_Sprite: {fileID: 2721305527393408592, guid: f2a8acb0e50c3d745b068b826c8c10d7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
