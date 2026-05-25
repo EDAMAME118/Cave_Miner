@@ -104,11 +104,11 @@ public class E_UpgradeScript : MonoBehaviour
             }
         }
         //2キー
-        if(Keyboard.current.digit2Key.wasPressedThisFrame)
+        if (Keyboard.current.digit2Key.wasPressedThisFrame)
         {
             //--移動速度強化
             //スコアが足りない場合
-            if(ScoreManager.score < PlayerDataManager.SpeedScore)
+            if (ScoreManager.score < PlayerDataManager.SpeedScore)
             {
                 ShowNotify($"スコアが足りません");
                 //アップグレード失敗SE
