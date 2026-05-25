@@ -54,7 +54,17 @@ public class E_UpgradeScript : MonoBehaviour
         //強化レベル表示
         DiggingLevelText.text = $"採掘速度 Lv{PlayerDataManager.DiggingLevel}";
         SpeedLevelText.text = $"移動速度 Lv{PlayerDataManager.SpeedLevel}";
-        RangeLevelText.text = $"採掘範囲 Lv{PlayerDataManager.RangeLevel}";
+
+        //採掘範囲の上限を設けておく
+        if (PlayerDataManager.RangeLevel >= 5)
+        {
+            RangeLevelText.text = "採掘範囲 LvMAX";
+        }
+        else
+        {
+            RangeLevelText.text = $"採掘範囲 Lv{PlayerDataManager.RangeLevel}";
+        }
+            
 
         //通知テキストのカウントダウン処理
         if (notifyTimer > 0)
@@ -123,29 +133,39 @@ public class E_UpgradeScript : MonoBehaviour
         //3キー
         if(Keyboard.current.digit3Key.wasPressedThisFrame)
         {
-            //--採掘範囲強化
-            //スコアが足りない場合
-            if (ScoreManager.score < PlayerDataManager.RangeScore)
+            //採掘範囲レベルがすでに上限に達している場合
+            if (PlayerDataManager.RangeLevel >= 5)
             {
-                ShowNotify($"スコアが足りません");
-                //アップグレード失敗SE
-                upgradeAudioSource.PlayOneShot(upgradeClip);
+                ShowNotify($"採掘範囲はすでにMAXです");
 
             }
-            //スコアが足りる場合
             else
             {
-                //スコアを消費
-                ScoreManager.score -= PlayerDataManager.RangeScore;
-                //必要スコアを上昇
-                PlayerDataManager.RangeScore += 20000;
-                //採掘範囲上昇
-                PlayerDataManager.miningRange += new Vector2(0.5f, 0.5f);
-                PlayerDataManager.miningRangeOffset -= new Vector2(PlayerDataManager.miningRangeOffset.x, 0.25f);
-                //レベル上昇
-                PlayerDataManager.RangeLevel += 1;
+                //--採掘範囲強化
+                //スコアが足りない場合
+                if (ScoreManager.score < PlayerDataManager.RangeScore)
+                {
+                    ShowNotify($"スコアが足りません");
+                    //アップグレード失敗SE
+                    upgradeAudioSource.PlayOneShot(upgradeClip);
 
-                ShowNotify($"採掘範囲アップグレード完了");
+                }
+                //スコアが足りる場合
+                else
+                {
+                    //スコアを消費
+                    ScoreManager.score -= PlayerDataManager.RangeScore;
+                    //必要スコアを上昇
+                    PlayerDataManager.RangeScore += 20000;
+                    //採掘範囲上昇
+                    PlayerDataManager.miningRange += new Vector2(0.5f, 0.5f);
+                    PlayerDataManager.miningRangeOffset -= new Vector2(PlayerDataManager.miningRangeOffset.x, 0.25f);
+                    //レベル上昇
+                    PlayerDataManager.RangeLevel += 1;
+
+                    ShowNotify($"採掘範囲アップグレード完了");
+                }
+
             }
         }
 
