@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b120615209ffe6468acd7c78d86f7d6, type: 3}
-  m_Name: StoneTile2
+  m_Name: WallTile 1
   m_EditorClassIdentifier: Assembly-CSharp::ScoreTile
-  m_Sprite: {fileID: -1915320724490040291, guid: e19d2a20375d5ce4eafe505dd074dd59, type: 3}
+  m_Sprite: {fileID: 218137648614192405, guid: a3556f60554c1ed47af8e78275b98086, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -33,7 +33,7 @@ MonoBehaviour:
     e33: 1
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
-  m_ColliderType: 0
+  m_ColliderType: 1
   scoreValue: 0
   mining_soeed: 0
   typeName: 
