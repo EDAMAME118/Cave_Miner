@@ -931,6 +931,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MiningArea
   targetTilemap: {fileID: 1443539995}
+  gaugePrefab: {fileID: 1616352648317087207, guid: 134fc1075ebc7824aad348a9c264d917, type: 3}
+  uiCanvas: {fileID: 1739843669}
 --- !u!212 &1121270820
 SpriteRenderer:
   serializedVersion: 2
@@ -14594,8 +14596,8 @@ Canvas:
   m_GameObject: {fileID: 1739843665}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 2036890089}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -14606,7 +14608,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 6
   m_TargetDisplay: 0
 --- !u!1 &1874392173
 GameObject:
