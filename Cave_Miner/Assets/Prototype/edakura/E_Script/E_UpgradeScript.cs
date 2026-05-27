@@ -50,7 +50,7 @@ public class E_UpgradeScript : MonoBehaviour
         //必要スコア表示、
         DiggingText.text = $"{PlayerDataManager.DiggingScore}スコア";
         SpeedText.text   = $"{PlayerDataManager.SpeedScore}スコア";
-        RangeText.text   = $"{PlayerDataManager.RangeScore}スコア";
+
         //強化レベル表示
         DiggingLevelText.text = $"採掘速度 Lv{PlayerDataManager.DiggingLevel}";
         SpeedLevelText.text = $"移動速度 Lv{PlayerDataManager.SpeedLevel}";
@@ -58,13 +58,15 @@ public class E_UpgradeScript : MonoBehaviour
         //採掘範囲の上限を設けておく
         if (PlayerDataManager.RangeLevel >= 5)
         {
+            RangeText.text = "LevelMAX";
             RangeLevelText.text = "採掘範囲 LvMAX";
         }
         else
         {
+            RangeText.text   = $"{PlayerDataManager.RangeScore}スコア";
             RangeLevelText.text = $"採掘範囲 Lv{PlayerDataManager.RangeLevel}";
         }
-            
+        
 
         //通知テキストのカウントダウン処理
         if (notifyTimer > 0)
