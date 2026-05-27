@@ -483,23 +483,6 @@ MonoBehaviour:
       m_Action: Move
       m_Flags: 8
     m_Flags: 0
-  DashAction:
-    m_Name: Dash
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 3fe5142a-2c0f-4545-8b0a-038eba7cc299
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 181c3abb-761a-4a3c-963e-ef8862110d05
-      m_Path: <Keyboard>/shift
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Dash
-      m_Flags: 0
-    m_Flags: 0
   DigAction:
     m_Name: Dig
     m_Type: 0
@@ -517,7 +500,6 @@ MonoBehaviour:
       m_Action: Dig
       m_Flags: 0
     m_Flags: 0
-  DashMultiplier: 1.5
   currentSpeed: 0
 --- !u!212 &814403846
 SpriteRenderer:
@@ -14709,7 +14691,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
+  m_BackGroundColor: {r: 0.1, g: 0.1, b: 0.1, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
