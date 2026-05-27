@@ -17,14 +17,15 @@ public class E_PlayerController : MonoBehaviour
     public static Vector2 miningRange;
     public static Vector2 miningRangeOffset;
 
-    private BoxCollider2D miningCollider;
+    //‘«‰¹—p
+    AudioSource audioSource;
+    [SerializeField] AudioClip walkClip;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rbody = GetComponent<Rigidbody2D>();
-
-        //miningCollider = transform.Find("MiningRange").transform;
 
         MoveAction.Enable();
         DigAction.Enable();
@@ -60,6 +61,11 @@ public class E_PlayerController : MonoBehaviour
         {
             //Debug.Log("‰ºˆÚ“®");
             transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+
+        if(PlayerVector != Vector2.zero)
+        {
+
         }
     }
 
