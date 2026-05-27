@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -46,6 +47,11 @@ public class E_TimeLimit : MonoBehaviour
         }
 
         if(TimeLimit < 0)
+        {
+            SceneManager.LoadScene(nextSceneBuy);
+        }
+
+        if (Keyboard.current.tabKey.isPressed && Keyboard.current.f12Key.isPressed)
         {
             SceneManager.LoadScene(nextSceneBuy);
         }
