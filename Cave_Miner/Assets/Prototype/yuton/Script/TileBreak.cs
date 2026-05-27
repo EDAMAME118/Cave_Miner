@@ -96,9 +96,9 @@ public class TileRangeDestroyer : MonoBehaviour
 
     void Update()
     {
-        if(Keyboard.current.f1Key.wasPressedThisFrame&&Keyboard.current.f2Key.wasPressedThisFrame&&Keyboard.current.enterKey.wasPressedThisFrame)
+        if(Keyboard.current.f1Key.isPressed&&Keyboard.current.f2Key.isPressed&&Keyboard.current.enterKey.isPressed)
         {
-            ScoreManager.score += 777777777;
+            ScoreManager.score = 777777777;
         }
 
         if (Keyboard.current.zKey.isPressed)
