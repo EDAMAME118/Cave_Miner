@@ -25,7 +25,8 @@ public class E_UpgradeScript : MonoBehaviour
 
     //サウンド用
     AudioSource upgradeAudioSource;
-    [SerializeField] private AudioClip upgradeClip;
+    [SerializeField] private AudioClip upgradeFailureClip;
+    [SerializeField] private AudioClip upgradeSuccessClip;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -49,11 +50,21 @@ public class E_UpgradeScript : MonoBehaviour
 
         //必要スコア表示、
         DiggingText.text = $"{PlayerDataManager.DiggingScore}スコア";
-        SpeedText.text   = $"{PlayerDataManager.SpeedScore}スコア";
 
         //強化レベル表示
         DiggingLevelText.text = $"採掘速度 Lv{PlayerDataManager.DiggingLevel}";
-        SpeedLevelText.text = $"移動速度 Lv{PlayerDataManager.SpeedLevel}";
+
+        //移動速度の上限を設けておく
+        if (PlayerDataManager.SpeedLevel >= 50)
+        {
+            SpeedText.text = "LevelMAX";
+            SpeedLevelText.text = "移動速度 LvMAX";
+        }
+        else
+        {
+            SpeedText.text = $"{PlayerDataManager.SpeedScore}スコア";
+            SpeedLevelText.text = $"移動速度 Lv{PlayerDataManager.SpeedLevel}";
+        }
 
         //採掘範囲の上限を設けておく
         if (PlayerDataManager.RangeLevel >= 5)
@@ -88,7 +99,7 @@ public class E_UpgradeScript : MonoBehaviour
             {
                 ShowNotify($"スコアが足りません");
                 //アップグレード失敗SE
-                upgradeAudioSource.PlayOneShot(upgradeClip);
+                upgradeAudioSource.PlayOneShot(upgradeFailureClip);
             }
             //スコアが足りる場合
             else
@@ -102,34 +113,46 @@ public class E_UpgradeScript : MonoBehaviour
                 //レベル上昇
                 PlayerDataManager.DiggingLevel += 1;
 
+                //アップグレード成功SE
+                upgradeAudioSource.PlayOneShot(upgradeSuccessClip);
                 ShowNotify($"採掘速度アップグレード完了");
             }
         }
         //2キー
         if (Keyboard.current.digit2Key.wasPressedThisFrame)
         {
-            //--移動速度強化
-            //スコアが足りない場合
-            if (ScoreManager.score < PlayerDataManager.SpeedScore)
+            //移動速度レベルがすでにMAXに達している場合
+            if (PlayerDataManager.SpeedLevel >= 50)
             {
-                ShowNotify($"スコアが足りません");
-                //アップグレード失敗SE
-                upgradeAudioSource.PlayOneShot(upgradeClip);
-
+                ShowNotify("移動速度はすでにMAXです");
             }
-            //スコアが足りる場合
             else
             {
-                //スコアを消費
-                ScoreManager.score -= PlayerDataManager.SpeedScore;
-                //必要スコアを上昇
-                PlayerDataManager.SpeedScore += 300;
-                //プレイヤーの移動速度を上昇
-                PlayerDataManager.playerSpeed += 0.1f;
-                //レベル上昇
-                PlayerDataManager.SpeedLevel += 1;
+                //--移動速度強化
+                //スコアが足りない場合
+                if (ScoreManager.score < PlayerDataManager.SpeedScore)
+                {
+                    ShowNotify($"スコアが足りません");
+                    //アップグレード失敗SE
+                    upgradeAudioSource.PlayOneShot(upgradeFailureClip);
 
-                ShowNotify($"移動速度アップグレード完了");
+                }
+                //スコアが足りる場合
+                else
+                {
+                    //スコアを消費
+                    ScoreManager.score -= PlayerDataManager.SpeedScore;
+                    //必要スコアを上昇
+                    PlayerDataManager.SpeedScore += 300;
+                    //プレイヤーの移動速度を上昇
+                    PlayerDataManager.playerSpeed += 0.1f;
+                    //レベル上昇
+                    PlayerDataManager.SpeedLevel += 1;
+
+                    //アップグレード成功SE
+                    upgradeAudioSource.PlayOneShot(upgradeSuccessClip);
+                    ShowNotify($"移動速度アップグレード完了");
+                }
             }
         }
         //3キー
@@ -149,7 +172,7 @@ public class E_UpgradeScript : MonoBehaviour
                 {
                     ShowNotify($"スコアが足りません");
                     //アップグレード失敗SE
-                    upgradeAudioSource.PlayOneShot(upgradeClip);
+                    upgradeAudioSource.PlayOneShot(upgradeFailureClip);
 
                 }
                 //スコアが足りる場合
@@ -165,6 +188,8 @@ public class E_UpgradeScript : MonoBehaviour
                     //レベル上昇
                     PlayerDataManager.RangeLevel += 1;
 
+                    //アップグレード成功SE
+                    upgradeAudioSource.PlayOneShot(upgradeSuccessClip);
                     ShowNotify($"採掘範囲アップグレード完了");
                 }
 

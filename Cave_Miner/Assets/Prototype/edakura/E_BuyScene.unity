@@ -153,8 +153,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 15, y: 209}
-  m_SizeDelta: {x: 369.4063, y: 91.6449}
+  m_AnchoredPosition: {x: 16.195095, y: 209}
+  m_SizeDelta: {x: 395.5119, y: 91.6449}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &34784412
 MonoBehaviour:
@@ -288,6 +288,7 @@ GameObject:
   - component: {fileID: 102254636}
   - component: {fileID: 102254635}
   - component: {fileID: 102254634}
+  - component: {fileID: 102254637}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -369,6 +370,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &102254637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102254633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
 --- !u!1 &134644803
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,7 +687,8 @@ MonoBehaviour:
   RangeLevelText: {fileID: 847861378}
   ScoreText: {fileID: 1307418271}
   nextSceneName: Y_CaveStageScene
-  upgradeClip: {fileID: 8300000, guid: f06686871db8f11468f9d5dc58460d9c, type: 3}
+  upgradeFailureClip: {fileID: 8300000, guid: f06686871db8f11468f9d5dc58460d9c, type: 3}
+  upgradeSuccessClip: {fileID: 8300000, guid: 67a000dc5fd7b6f4d823676504863d57, type: 3}
 --- !u!4 &262315429
 Transform:
   m_ObjectHideFlags: 0
