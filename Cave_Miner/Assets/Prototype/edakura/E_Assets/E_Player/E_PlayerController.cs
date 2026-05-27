@@ -20,12 +20,14 @@ public class E_PlayerController : MonoBehaviour
     //足音用
     AudioSource audioSource;
     [SerializeField] AudioClip walkClip;
+    [SerializeField] private float walkAudioDelay = 0.0f;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rbody = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
 
         MoveAction.Enable();
         DigAction.Enable();
@@ -63,10 +65,22 @@ public class E_PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
 
+        //プレイヤーが移動している場合
         if(PlayerVector != Vector2.zero)
         {
-
+            //足音用変数加算
+            walkAudioDelay += Time.deltaTime;
+            if(walkAudioDelay > 0.5f)
+            {
+                Debug.Log("足音再生");
+                //効果音再生
+                audioSource.PlayOneShot(walkClip);
+                walkAudioDelay = 0.0f;
+            }
         }
+        //立ち止まっている場合
+        else
+            walkAudioDelay = 0.0f;
     }
 
     private void FixedUpdate()
