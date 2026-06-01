@@ -10,8 +10,8 @@ public class E_ShowResult : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        showScoreText.text = $"¡‰ñ‚ÌŠl“¾ƒXƒRƒA:{ScoreManager.dayScore}\n" +
-                             $"Œ»İ‚Ì‡ŒvƒXƒRƒA:{ScoreManager.score}";
+        showScoreText.text = $"¡‰ñ‚ÌŠl“¾‹àŠz:{ScoreManager.dayScore}‰~ \n" +
+                             $"Œ»İ‚Ì‡Œv‹àŠz:{ScoreManager.score}‰~";
         showMiningCountText.text = $"¡‰ñ‚ÌÌŒ@ŒÂ”:{ScoreManager.dayMiningCount}\n" +
                                    $"Œ»İ‚Ì‡ŒvÌŒ@ŒÂ”:{ScoreManager.miningCount}";
     }

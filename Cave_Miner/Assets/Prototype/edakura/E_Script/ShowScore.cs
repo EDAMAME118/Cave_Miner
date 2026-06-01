@@ -10,6 +10,6 @@ public class ShowScore : MonoBehaviour
     void Update()
     {
         //スコアマネージャーの値を表示する
-        scoreText.text = $"スコア:{ScoreManager.dayScore}";
+        scoreText.text = $"金額:{ScoreManager.dayScore}円";
     }
 }
