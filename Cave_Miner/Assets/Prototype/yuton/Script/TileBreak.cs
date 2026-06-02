@@ -2,12 +2,15 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class TileRangeDestroyer : MonoBehaviour
 {
     public Tilemap targetTilemap;
     private Transform destroyRange;
-
+    public Text digtimetext; 
+    float requiredTime = 3.0f;
+    private float currentdigtime=0.0f;
     // --- 変更点：ブロックごとの採掘時間を記憶する辞書 ---
     // [タイルの座標, 掘り続けた時間] をセットで保存します
     private Dictionary<Vector3Int, float> digProgress = new Dictionary<Vector3Int, float>();
@@ -41,9 +44,9 @@ public class TileRangeDestroyer : MonoBehaviour
                     }
                     // 2. この特定のブロックの採掘時間だけを進める
                     digProgress[targetPos] += Time.deltaTime * PlayerDataManager.playerDigSpeed;
-
+                    currentdigtime = digProgress[targetPos];
                     // 3. このブロックを破壊するのに必要な時間を判定（デフォルトは3.0秒）
-                    float requiredTime = 3.0f;
+                    requiredTime = 0f;
                     if (tile is ScoreTile scoreTile)
                     {
                         // ScoreTileの場合は設定された時間を適用
@@ -96,6 +99,9 @@ public class TileRangeDestroyer : MonoBehaviour
 
     void Update()
     {
+        //これでテキストいじれるようになるらしい
+        digtimetext.text = $"{currentdigtime}秒";
+
         if (Keyboard.current.f1Key.isPressed && Keyboard.current.f2Key.isPressed && Keyboard.current.enterKey.isPressed)
         {
             ScoreManager.score = 777777777;
