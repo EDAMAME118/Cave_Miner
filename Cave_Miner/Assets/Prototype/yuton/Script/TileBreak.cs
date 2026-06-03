@@ -6,27 +6,35 @@ using UnityEngine.UI;
 
 public class TileRangeDestroyer : MonoBehaviour
 {
+    [SerializeField] private Image gaugeFillImage;
     public Tilemap targetTilemap;
     private Transform destroyRange;
-    public Text digtimetext; 
-    float requiredTime = 3.0f;
-    private float currentdigtime=0.0f;
-    // --- 変更点：ブロックごとの採掘時間を記憶する辞書 ---
+
+    // 【変更】Updateでも使うため、一番進捗のあるタイルの情報を保持する変数
+    private float currentdigtime = 0.0f;
+    private float requiredTime = 3.0f;
+
     // [タイルの座標, 掘り続けた時間] をセットで保存します
     private Dictionary<Vector3Int, float> digProgress = new Dictionary<Vector3Int, float>();
+
     void Start()
     {
         destroyRange = GetComponent<Transform>();
-
         destroyRange.localScale = PlayerDataManager.miningRange;
         destroyRange.localPosition = PlayerDataManager.miningRangeOffset;
 
+        // 最初はゲージを空にしておく
+        if (gaugeFillImage != null) gaugeFillImage.fillAmount = 0f;
     }
+
     public void DestroyTilesInBounds()
     {
         Bounds bounds = GetComponent<Collider2D>().bounds;
         Vector3Int minCell = targetTilemap.WorldToCell(bounds.min);
         Vector3Int maxCell = targetTilemap.WorldToCell(bounds.max);
+
+        // ゲージ計算用に、このフレームでの「最大進捗率」を一時的に記録する変数
+        float maxProgressRatio = 0f;
 
         for (int x = minCell.x; x <= maxCell.x; x++)
         {
@@ -42,19 +50,30 @@ public class TileRangeDestroyer : MonoBehaviour
                     {
                         digProgress[targetPos] = 0f;
                     }
+
                     // 2. この特定のブロックの採掘時間だけを進める
                     digProgress[targetPos] += Time.deltaTime * PlayerDataManager.playerDigSpeed;
-                    currentdigtime = digProgress[targetPos];
+
                     // 3. このブロックを破壊するのに必要な時間を判定（デフォルトは3.0秒）
-                    requiredTime = 0f;
+                    float tileRequiredTime = 3.0f; // ローカル変数にして個別に計算
                     if (tile is ScoreTile scoreTile)
                     {
-                        // ScoreTileの場合は設定された時間を適用
-                        requiredTime = scoreTile.mining_soeed;
+                        tileRequiredTime = scoreTile.mining_soeed;
+                    }
+
+                    // 【追加】このタイルの進捗率（0.0 〜 1.0）を計算
+                    float currentRatio = digProgress[targetPos] / tileRequiredTime;
+
+                    // 範囲内で「一番壊れそうなタイル」の情報を全体の変数にキープする
+                    if (currentRatio > maxProgressRatio)
+                    {
+                        maxProgressRatio = currentRatio;
+                        currentdigtime = digProgress[targetPos];
+                        requiredTime = tileRequiredTime;
                     }
 
                     // 4. 採掘時間が目標に達したかチェック
-                    if (digProgress[targetPos] >= requiredTime)
+                    if (digProgress[targetPos] >= tileRequiredTime)
                     {
                         // タイルを破壊
                         targetTilemap.SetTile(targetPos, null);
@@ -69,7 +88,6 @@ public class TileRangeDestroyer : MonoBehaviour
                         }
                         else
                         {
-                            // 鉱石以外の普通のタイルの場合
                             ScoreManager.score += 10;
                             ScoreManager.totalScore += 10;
                             ScoreManager.dayScore += 10;
@@ -86,8 +104,6 @@ public class TileRangeDestroyer : MonoBehaviour
                 }
                 else
                 {
-                    // もしタイルが無い（既に壊れた、あるいは範囲がずれて対象から外れた）場合、
-                    // 無駄な記憶を消去してメモリを節約する
                     if (digProgress.ContainsKey(targetPos))
                     {
                         digProgress.Remove(targetPos);
@@ -95,22 +111,27 @@ public class TileRangeDestroyer : MonoBehaviour
                 }
             }
         }
+
+        // もし範囲内に一つもタイルがなかったら数値をリセット
+        if (maxProgressRatio == 0f)
+        {
+            currentdigtime = 0f;
+            requiredTime = 3.0f;
+        }
     }
 
     void Update()
     {
-        //これでテキストいじれるようになるらしい
-        digtimetext.text = $"{currentdigtime}秒";
-
-        if (Keyboard.current.f1Key.isPressed && Keyboard.current.f2Key.isPressed && Keyboard.current.enterKey.isPressed)
-        {
-            ScoreManager.score = 777777777;
-        }
-
         if (Keyboard.current.zKey.isPressed)
         {
             // キーが押されている間は、毎フレーム範囲内のタイルの時間を進める
             DestroyTilesInBounds();
+
+            // 【修正】「現在の秒数 / 必要時間」で0.0〜1.0の割合にしてゲージに代入
+            if (gaugeFillImage != null && requiredTime > 0f)
+            {
+                gaugeFillImage.fillAmount = Mathf.Clamp01(currentdigtime / requiredTime);
+            }
         }
         else
         {
@@ -119,7 +140,19 @@ public class TileRangeDestroyer : MonoBehaviour
             {
                 digProgress.Clear();
             }
+
+            // 【追加】キーを離したらゲージもゼロにする
+            currentdigtime = 0f;
+            if (gaugeFillImage != null)
+            {
+                gaugeFillImage.fillAmount = 0f;
+            }
+        }
+
+        // デバッグ用隠しコマンド
+        if (Keyboard.current.f1Key.isPressed && Keyboard.current.f2Key.isPressed && Keyboard.current.enterKey.isPressed)
+        {
+            ScoreManager.score = 777777777;
         }
     }
 }
-
