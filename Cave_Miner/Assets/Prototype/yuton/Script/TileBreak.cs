@@ -8,11 +8,13 @@ public class TileRangeDestroyer : MonoBehaviour
 {
     [SerializeField] private Image gaugeFillImage;
     public Tilemap targetTilemap;
+    
     private Transform destroyRange;
 
     // 【変更】Updateでも使うため、一番進捗のあるタイルの情報を保持する変数
     private float currentdigtime = 0.0f;
     private float requiredTime = 3.0f;
+    public float crackstime=0.0f;
 
     // [タイルの座標, 掘り続けた時間] をセットで保存します
     private Dictionary<Vector3Int, float> digProgress = new Dictionary<Vector3Int, float>();
@@ -69,6 +71,7 @@ public class TileRangeDestroyer : MonoBehaviour
                     {
                         maxProgressRatio = currentRatio;
                         currentdigtime = digProgress[targetPos];
+                        crackstime = currentdigtime;
                         requiredTime = tileRequiredTime;
                     }
 
@@ -116,6 +119,7 @@ public class TileRangeDestroyer : MonoBehaviour
         if (maxProgressRatio == 0f)
         {
             currentdigtime = 0f;
+            crackstime += currentdigtime;
             requiredTime = 3.0f;
         }
     }
