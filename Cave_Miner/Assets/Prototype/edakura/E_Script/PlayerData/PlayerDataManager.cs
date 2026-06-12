@@ -18,6 +18,9 @@ public class PlayerDataManager : MonoBehaviour
     public static float playerDigSpeed;
     public static float playerSpeed;
 
+    //現在選択中のステージ
+    public static Stage currentStage = 0;
+
     public static Vector2 miningRange = Vector2.zero;
     public static Vector2 miningRangeOffset = Vector2.zero;
 

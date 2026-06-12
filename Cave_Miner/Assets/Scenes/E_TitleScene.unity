@@ -410,7 +410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a4e8b263b1207941a836e5f572bfbc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::E_TitleSceneChanger
-  nextScene: Y_CaveStageScene
+  nextScene: E_StageSelect
   titleEnterClip: {fileID: 8300000, guid: 67a000dc5fd7b6f4d823676504863d57, type: 3}
 --- !u!4 &617487650
 Transform:

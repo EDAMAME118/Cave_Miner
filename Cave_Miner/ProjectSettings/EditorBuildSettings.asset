@@ -9,8 +9,17 @@ EditorBuildSettings:
     path: Assets/Scenes/E_TitleScene.unity
     guid: b6ca32bd3a8d29d4490fdb96f797a983
   - enabled: 1
+    path: Assets/Prototype/edakura/E_StageSelect.unity
+    guid: b90015a97ac401b4bb8c3e9b0da29f45
+  - enabled: 1
     path: Assets/Prototype/yuton/Y_CaveStageScene.unity
     guid: d2315d1f7fd16ca4c9191b38361af8a1
+  - enabled: 1
+    path: Assets/Prototype/yuton/Y_CaveStage2.unity
+    guid: c6f9eac0d562d6640ad08285c7e63174
+  - enabled: 1
+    path: Assets/Prototype/yuton/Y_CaveStage3.unity
+    guid: add54077889b9d946b9c62b9a4cf786a
   - enabled: 1
     path: Assets/Prototype/edakura/E_ResultScene.unity
     guid: 04d62be429e8aba4383aac89470a1780
