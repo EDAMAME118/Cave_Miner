@@ -22,8 +22,8 @@ public class TileRangeDestroyer : MonoBehaviour
     void Start()
     {
         destroyRange = GetComponent<Transform>();
-        destroyRange.localScale = PlayerDataManager.miningRange;
-        destroyRange.localPosition = PlayerDataManager.miningRangeOffset;
+        destroyRange.localScale = PlayerDataManager.Instance.miningRange;
+        destroyRange.localPosition = PlayerDataManager.Instance.miningRangeOffset;
 
         // 最初はゲージを空にしておく
         if (gaugeFillImage != null) gaugeFillImage.fillAmount = 0f;
@@ -54,7 +54,7 @@ public class TileRangeDestroyer : MonoBehaviour
                     }
 
                     // 2. この特定のブロックの採掘時間だけを進める
-                    digProgress[targetPos] += Time.deltaTime * PlayerDataManager.playerDigSpeed;
+                    digProgress[targetPos] += Time.deltaTime * PlayerDataManager.Instance.playerDigSpeed;
 
                     // 3. このブロックを破壊するのに必要な時間を判定（デフォルトは3.0秒）
                     float tileRequiredTime = 3.0f; // ローカル変数にして個別に計算
@@ -84,22 +84,22 @@ public class TileRangeDestroyer : MonoBehaviour
                         // --- スコア加算処理 ---
                         if (tile is ScoreTile destroyedScoreTile)
                         {
-                            ScoreManager.score += destroyedScoreTile.scoreValue;
-                            ScoreManager.totalScore += destroyedScoreTile.scoreValue;
-                            ScoreManager.dayScore += destroyedScoreTile.scoreValue;
-                            Debug.Log($"{destroyedScoreTile.typeName} を破壊！ スコア +{destroyedScoreTile.scoreValue} (合計: {ScoreManager.score})");
+                            ScoreManager.Instance.score += destroyedScoreTile.scoreValue;
+                            ScoreManager.Instance.totalScore += destroyedScoreTile.scoreValue;
+                            ScoreManager.Instance.dayScore += destroyedScoreTile.scoreValue;
+                            Debug.Log($"{destroyedScoreTile.typeName} を破壊！ スコア +{destroyedScoreTile.scoreValue} (合計: {ScoreManager.Instance.score})");
                         }
                         else
                         {
-                            ScoreManager.score += 10;
-                            ScoreManager.totalScore += 10;
-                            ScoreManager.dayScore += 10;
+                            ScoreManager.Instance.score += 10;
+                            ScoreManager.Instance.totalScore += 10;
+                            ScoreManager.Instance.dayScore += 10;
                         }
 
                         // 共通のカウントアップ
-                        ScoreManager.miningCount++;
-                        ScoreManager.totalMiningCount++;
-                        ScoreManager.dayMiningCount++;
+                        ScoreManager.Instance.miningCount++;
+                        ScoreManager.Instance.totalMiningCount++;
+                        ScoreManager.Instance.dayMiningCount++;
 
                         // 5. 破壊が終わったので、この座標のタイマー記憶を削除する
                         digProgress.Remove(targetPos);
@@ -156,7 +156,7 @@ public class TileRangeDestroyer : MonoBehaviour
         // デバッグ用隠しコマンド
         if (Keyboard.current.f1Key.isPressed && Keyboard.current.f2Key.isPressed && Keyboard.current.enterKey.isPressed)
         {
-            ScoreManager.score = 777777777;
+            ScoreManager.Instance.score = 777777777;
         }
     }
 }

@@ -41,7 +41,7 @@ public class E_PlayerController : MonoBehaviour
         //MoveAction‚Ì’l‚ğ“Ç‚İ‚ñ‚ÅPlayerVector‚É“ü‚ê‚é
         PlayerVector = MoveAction.ReadValue<Vector2>();
 
-        currentSpeed = PlayerDataManager.playerSpeed;
+        currentSpeed = PlayerDataManager.Instance.playerSpeed;
         
         //Œü‚«‚Ì’²®
         if (PlayerVector.x > 0.0f)

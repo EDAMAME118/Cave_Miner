@@ -39,8 +39,8 @@ public class E_UpgradeScript : MonoBehaviour
     void Start()
     {
         //その日得たスコアと採掘数を初期化
-        ScoreManager.dayMiningCount = 0;
-        ScoreManager.dayScore = 0;
+        ScoreManager.Instance.dayMiningCount = 0;
+        ScoreManager.Instance.dayScore = 0;
 
         //強化時表示されるテキストを空にしておく
         NotifyText.text = $"";
@@ -52,36 +52,36 @@ public class E_UpgradeScript : MonoBehaviour
     void Update()
     {
         //現在のスコアを表示
-        ScoreText.text = $"現在の金額:{ScoreManager.score}円";
+        ScoreText.text = $"現在の金額:{ScoreManager.Instance.score}円";
 
         //必要スコア表示、
-        DiggingText.text = $"{PlayerDataManager.DiggingScore}円";
+        DiggingText.text = $"{PlayerDataManager.Instance.DiggingScore}円";
 
         //強化レベル表示
-        DiggingLevelText.text = $"採掘速度 Lv{PlayerDataManager.DiggingLevel}";
+        DiggingLevelText.text = $"採掘速度 Lv{PlayerDataManager.Instance.DiggingLevel}";
 
         //移動速度の上限を設けておく
-        if (PlayerDataManager.SpeedLevel >= 50)
+        if (PlayerDataManager.Instance.SpeedLevel >= 50)
         {
             SpeedText.text = "LevelMAX";
             SpeedLevelText.text = "移動速度 LvMAX";
         }
         else
         {
-            SpeedText.text = $"{PlayerDataManager.SpeedScore}円";
-            SpeedLevelText.text = $"移動速度 Lv{PlayerDataManager.SpeedLevel}";
+            SpeedText.text = $"{PlayerDataManager.Instance.SpeedScore}円";
+            SpeedLevelText.text = $"移動速度 Lv{PlayerDataManager.Instance.SpeedLevel}";
         }
 
         //採掘範囲の上限を設けておく
-        if (PlayerDataManager.RangeLevel >= 5)
+        if (PlayerDataManager.Instance.RangeLevel >= 5)
         {
             RangeText.text = "LevelMAX";
             RangeLevelText.text = "採掘範囲 LvMAX";
         }
         else
         {
-            RangeText.text   = $"{PlayerDataManager.RangeScore}円";
-            RangeLevelText.text = $"採掘範囲 Lv{PlayerDataManager.RangeLevel}";
+            RangeText.text   = $"{PlayerDataManager.Instance.RangeScore}円";
+            RangeLevelText.text = $"採掘範囲 Lv{PlayerDataManager.Instance.RangeLevel}";
         }
         
 
@@ -132,7 +132,7 @@ public class E_UpgradeScript : MonoBehaviour
             {
                 //--採掘速度強化
                 //スコアが足りない場合
-                if (ScoreManager.score < PlayerDataManager.DiggingScore)
+                if (ScoreManager.Instance.score < PlayerDataManager.Instance.DiggingScore)
                 {
                     ShowNotify($"お金が足りません");
                     //アップグレード失敗SE
@@ -142,13 +142,13 @@ public class E_UpgradeScript : MonoBehaviour
                 else
                 {
                     //スコアを消費
-                    ScoreManager.score -= PlayerDataManager.DiggingScore;
+                    ScoreManager.Instance.score -= PlayerDataManager.Instance.DiggingScore;
                     //必要スコアを上昇
-                    PlayerDataManager.DiggingScore += 500;
+                    PlayerDataManager.Instance.DiggingScore += 500;
                     //プレイヤーの採掘速度を上昇
-                    PlayerDataManager.playerDigSpeed += 0.2f;
+                    PlayerDataManager.Instance.playerDigSpeed += 0.2f;
                     //レベル上昇
-                    PlayerDataManager.DiggingLevel += 1;
+                    PlayerDataManager.Instance.DiggingLevel += 1;
 
                     //アップグレード成功SE
                     upgradeAudioSource.PlayOneShot(upgradeSuccessClip);
@@ -179,7 +179,7 @@ public class E_UpgradeScript : MonoBehaviour
             if (Keyboard.current.digit2Key.wasPressedThisFrame || holdTimer2Key > 1.0f)
             {
                 //移動速度レベルがすでにMAXに達している場合
-                if (PlayerDataManager.SpeedLevel >= 50)
+                if (PlayerDataManager.Instance.SpeedLevel >= 50)
                 {
                     ShowNotify("移動速度はすでにMAXです");
                 }
@@ -187,7 +187,7 @@ public class E_UpgradeScript : MonoBehaviour
                 {
                     //--移動速度強化
                     //スコアが足りない場合
-                    if (ScoreManager.score < PlayerDataManager.SpeedScore)
+                    if (ScoreManager.Instance.score < PlayerDataManager.Instance.SpeedScore)
                     {
                         ShowNotify($"お金が足りません");
                         //アップグレード失敗SE
@@ -198,13 +198,13 @@ public class E_UpgradeScript : MonoBehaviour
                     else
                     {
                         //スコアを消費
-                        ScoreManager.score -= PlayerDataManager.SpeedScore;
+                        ScoreManager.Instance.score -= PlayerDataManager.Instance.SpeedScore;
                         //必要スコアを上昇
-                        PlayerDataManager.SpeedScore += 300;
+                        PlayerDataManager.Instance.SpeedScore += 300;
                         //プレイヤーの移動速度を上昇
-                        PlayerDataManager.playerSpeed += 0.1f;
+                        PlayerDataManager.Instance.playerSpeed += 0.1f;
                         //レベル上昇
-                        PlayerDataManager.SpeedLevel += 1;
+                        PlayerDataManager.Instance.SpeedLevel += 1;
 
                         //アップグレード成功SE
                         upgradeAudioSource.PlayOneShot(upgradeSuccessClip);
@@ -236,7 +236,7 @@ public class E_UpgradeScript : MonoBehaviour
             if (Keyboard.current.digit3Key.wasPressedThisFrame || holdTimer3Key > 1.0f)
             {
                 //採掘範囲レベルがすでに上限に達している場合
-                if (PlayerDataManager.RangeLevel >= 5)
+                if (PlayerDataManager.Instance.RangeLevel >= 5)
                 {
                     ShowNotify($"採掘範囲はすでにMAXです");
 
@@ -245,7 +245,7 @@ public class E_UpgradeScript : MonoBehaviour
                 {
                     //--採掘範囲強化
                     //スコアが足りない場合
-                    if (ScoreManager.score < PlayerDataManager.RangeScore)
+                    if (ScoreManager.Instance.score < PlayerDataManager.Instance.RangeScore)
                     {
                         ShowNotify($"お金が足りません");
                         //アップグレード失敗SE
@@ -256,14 +256,14 @@ public class E_UpgradeScript : MonoBehaviour
                     else
                     {
                         //スコアを消費
-                        ScoreManager.score -= PlayerDataManager.RangeScore;
+                        ScoreManager.Instance.score -= PlayerDataManager.Instance.RangeScore;
                         //必要スコアを上昇
-                        PlayerDataManager.RangeScore += 20000;
+                        PlayerDataManager.Instance.RangeScore += 20000;
                         //採掘範囲上昇
-                        PlayerDataManager.miningRange += new Vector2(0.5f, 0.5f);
-                        PlayerDataManager.miningRangeOffset -= new Vector2(PlayerDataManager.miningRangeOffset.x, 0.25f);
+                        PlayerDataManager.Instance.miningRange += new Vector2(0.5f, 0.5f);
+                        PlayerDataManager.Instance.miningRangeOffset -= new Vector2(PlayerDataManager.Instance.miningRangeOffset.x, 0.25f);
                         //レベル上昇
-                        PlayerDataManager.RangeLevel += 1;
+                        PlayerDataManager.Instance.RangeLevel += 1;
 
                         //アップグレード成功SE
                         upgradeAudioSource.PlayOneShot(upgradeSuccessClip);

@@ -21,19 +21,19 @@ public class StageSelectManager : MonoBehaviour
         //１キー
         if(Keyboard.current.digit1Key.wasPressedThisFrame)
         {
-            PlayerDataManager.currentStage = Stage.STAGE1;
+            PlayerDataManager.Instance.currentStage = Stage.STAGE1;
             Debug.Log("Stage1選択中");
         }
         //２キー
         else if(Keyboard.current.digit2Key.wasPressedThisFrame)
         {
-            PlayerDataManager.currentStage = Stage.STAGE2;
+            PlayerDataManager.Instance.currentStage = Stage.STAGE2;
             Debug.Log("Stage2選択中");
         }
         //３キー
         else if(Keyboard.current.digit3Key.wasPressedThisFrame)
         {
-            PlayerDataManager.currentStage = Stage.STAGE3;
+            PlayerDataManager.Instance.currentStage = Stage.STAGE3;
             Debug.Log("Stage3選択中");
         }
 
@@ -41,7 +41,7 @@ public class StageSelectManager : MonoBehaviour
         if (Keyboard.current.enterKey.wasPressedThisFrame)
         {
             //現在のステージ番号
-            int stageIndex = (int)PlayerDataManager.currentStage;
+            int stageIndex = (int)PlayerDataManager.Instance.currentStage;
 
             //現在のステージ番号がステージ名配列の長さを超えていないか
             //見ているステージ配列の要素がNULLではないか

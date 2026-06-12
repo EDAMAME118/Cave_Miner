@@ -2,33 +2,48 @@ using UnityEngine;
 
 public class PlayerDataManager : MonoBehaviour
 {
+    public static PlayerDataManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        // まだインスタンスがない場合は、自分を登録
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); // シーンが切り替わっても破棄しない
+        }
+        else
+        {
+            // すでに存在する場合は、重複している自分を破棄
+            Destroy(gameObject);
+        }
+    }
+
     // アップグレードに必要なスコア変数(強化毎に上昇)
     // 初期値は100でおいておく
-    public static int DiggingScore = 500;
-    public static int SpeedScore   = 300;
-    public static int RangeScore   = 10000;
+    public int DiggingScore = 500;
+    public int SpeedScore   = 300;
+    public int RangeScore   = 10000;
 
     // 各種強化レベル
     // 初期値はLv1でおいておく
-    public static int DiggingLevel = 1;
-    public static int SpeedLevel   = 1;
-    public static int RangeLevel   = 1;
+    public int DiggingLevel = 1;
+    public int SpeedLevel   = 1;
+    public int RangeLevel   = 1;
 
     // プレイヤーステータス
-    public static float playerDigSpeed;
-    public static float playerSpeed;
+    public float playerDigSpeed;
+    public float playerSpeed;
 
     //現在選択中のステージ
-    public static Stage currentStage = 0;
+    public Stage currentStage = 0;
 
-    public static Vector2 miningRange = Vector2.zero;
-    public static Vector2 miningRangeOffset = Vector2.zero;
+    public Vector2 miningRange = Vector2.zero;
+    public Vector2 miningRangeOffset = Vector2.zero;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Awake()
+    void Start()
     {
-        DontDestroyOnLoad(this.gameObject);
-
         playerDigSpeed = 1.0f;
         playerSpeed = 5f;
 
