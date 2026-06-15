@@ -446,6 +446,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4994371104990442515, guid: 09c7422961086684bba4dcf29fd198c9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 810897017}
+    - targetCorrespondingSourceObject: {fileID: 5345159158423481985, guid: 09c7422961086684bba4dcf29fd198c9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1691418865}
   m_SourcePrefab: {fileID: 100100000, guid: 09c7422961086684bba4dcf29fd198c9, type: 3}
 --- !u!4 &810897015 stripped
 Transform:
@@ -14357,13 +14360,21 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1443539992}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a44f2b60a97837b45970466133c7b52d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TileCracks
-  tilebreak: {fileID: 1691418863}
-  crackscheck: 0
+  tileDestroyer: {fileID: 0}
+  crack1: {fileID: 6860043218326929001, guid: 50408add83f7be8488aecea323e09ae8, type: 3}
+  crack2: {fileID: -8347593149249380806, guid: ab3f837a40348a743a1b3e3cb286db8c, type: 3}
+  crack3: {fileID: -4809268675864642640, guid: 94177187062432e42973a81444cf39eb, type: 3}
+  crackRenderer: {fileID: 0}
+--- !u!1 &1502332649 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5345159158423481985, guid: 09c7422961086684bba4dcf29fd198c9, type: 3}
+  m_PrefabInstance: {fileID: 810897014}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1670420166
 GameObject:
   m_ObjectHideFlags: 0
@@ -14419,17 +14430,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1691418863 stripped
+--- !u!114 &1691418865
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4390711218864344873, guid: 09c7422961086684bba4dcf29fd198c9, type: 3}
-  m_PrefabInstance: {fileID: 810897014}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1502332649}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c90c3982bbf491429d07f21503fc91a, type: 3}
+  m_Script: {fileID: 11500000, guid: a44f2b60a97837b45970466133c7b52d, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MiningArea
+  m_EditorClassIdentifier: Assembly-CSharp::TileCracks
+  tileDestroyer: {fileID: 0}
+  crack1: {fileID: 6860043218326929001, guid: 50408add83f7be8488aecea323e09ae8, type: 3}
+  crack2: {fileID: -8347593149249380806, guid: ab3f837a40348a743a1b3e3cb286db8c, type: 3}
+  crack3: {fileID: -4809268675864642640, guid: 94177187062432e42973a81444cf39eb, type: 3}
+  crackRenderer: {fileID: 0}
 --- !u!1 &1739843665
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,20 +1,49 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class TileCracks : MonoBehaviour
 {
-    public TileRangeDestroyer tilebreak;
+    [SerializeField] private TileRangeDestroyer tileDestroyer;
 
-    public float crackscheck = 0.0f;//秒数確認変数 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-  
+    [Header("ひび割れ画像")]
+    [SerializeField] private Sprite crack1;
+    [SerializeField] private Sprite crack2;
+    [SerializeField] private Sprite crack3;
 
-    // Update is called once per frame
+    [SerializeField] private SpriteRenderer crackRenderer;
+
     void Update()
     {
-        //使いやすくするために秒数を変数に代入
-        crackscheck = tilebreak.crackstime;
-        //秒数取得できているか確認用
-        Debug.Log(crackscheck);
+        float requiredTime = tileDestroyer.RequiredTime;
+        float currentTime = tileDestroyer.crackstime;
 
+        // 掘っているタイル座標
+        Vector3Int tilePos = tileDestroyer.currentMiningTile;
+
+        // タイル中心へ移動
+        crackRenderer.transform.position =
+            tileDestroyer.targetTilemap.GetCellCenterWorld(tilePos);
+
+        float progress = currentTime / requiredTime;
+
+        if (progress >= 0.75f)
+        {
+            crackRenderer.sprite = crack3;
+            crackRenderer.enabled = true;
+        }
+        else if (progress >= 0.5f)
+        {
+            crackRenderer.sprite = crack2;
+            crackRenderer.enabled = true;
+        }
+        else if (progress >= 0.25f)
+        {
+            crackRenderer.sprite = crack1;
+            crackRenderer.enabled = true;
+        }
+        else
+        {
+            crackRenderer.enabled = false;
+        }
     }
 }

@@ -1,2 +1,16 @@
 fileFormatVersion: 2
 guid: a44f2b60a97837b45970466133c7b52d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - tileDestroyer: {instanceID: 0}
+  - crack1: {fileID: 6860043218326929001, guid: 50408add83f7be8488aecea323e09ae8, type: 3}
+  - crack2: {fileID: -8347593149249380806, guid: ab3f837a40348a743a1b3e3cb286db8c, type: 3}
+  - crack3: {fileID: -4809268675864642640, guid: 94177187062432e42973a81444cf39eb, type: 3}
+  - crackRenderer: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
