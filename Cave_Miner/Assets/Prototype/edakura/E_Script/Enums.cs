@@ -8,6 +8,6 @@ public enum Stage
 public enum Upgrade
 {
     MINING_SPEED,
-    MINING_RANGE,
-    MOVE_SPEED
+    MOVE_SPEED,
+    MINING_RANGE
 }

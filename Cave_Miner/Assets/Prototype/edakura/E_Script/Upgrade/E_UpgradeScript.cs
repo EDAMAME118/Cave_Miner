@@ -88,6 +88,7 @@ public class E_UpgradeScript : MonoBehaviour
             RangeLevelText.text = $"採掘範囲 Lv{PlayerDataManager.Instance.RangeLevel}";
         }
 
+        //左右キーによる強化項目選択
         if(Keyboard.current.rightArrowKey.wasPressedThisFrame)
         {
             upgradeSelectIndex++;
@@ -97,13 +98,42 @@ public class E_UpgradeScript : MonoBehaviour
             upgradeSelectIndex--;
         }
 
-        if(upgradeSelectIndex > 3)
+        //強化項目を超えて選択値が移動した場合の処理
+        if(upgradeSelectIndex > 2)
         {
             upgradeSelectIndex = 0;
         }
         else if(upgradeSelectIndex < 0)
         {
             upgradeSelectIndex = 2;
+        }
+
+        //強化項目テキストの色変え
+        if(upgradeSelectIndex == (int)Upgrade.MINING_SPEED)
+        {
+            DiggingText.color = new Color32(255, 0, 0, 255);
+        }
+        else
+        {
+            DiggingText.color = new Color32(50, 50, 50, 255);
+        }
+
+        if (upgradeSelectIndex == (int)Upgrade.MOVE_SPEED)
+        {
+            SpeedText.color = new Color32(255, 0, 0, 255);
+        }
+        else
+        {
+            SpeedText.color = new Color32(50, 50, 50, 255);
+        }
+
+        if(upgradeSelectIndex == (int)Upgrade.MINING_RANGE)
+        {
+            RangeText.color = new Color32(255, 0, 0, 255);
+        }
+        else
+        {
+            RangeText.color = new Color32(50, 50, 50, 255);
         }
 
 
@@ -129,8 +159,6 @@ public class E_UpgradeScript : MonoBehaviour
         //Enterで次の画面へ移動
         if (Keyboard.current.enterKey.wasPressedThisFrame)
         {
-            ////移動時自身をfalseにする
-            //this.gameObject.SetActive(false);
             //シーン移動
             SceneManager.LoadScene(nextSceneName);
         }
