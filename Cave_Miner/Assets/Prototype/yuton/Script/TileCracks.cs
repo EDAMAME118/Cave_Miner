@@ -15,8 +15,7 @@ public class TileCracks : MonoBehaviour
     void Update()
     {
         float requiredTime = tileDestroyer.RequiredTime;
-        float currentTime = tileDestroyer.crackstime;
-
+        float currentTime = tileDestroyer.CurrentDigTime;
         // Œ@‚Á‚Ä‚¢‚éƒ^ƒCƒ‹À•W
         Vector3Int tilePos = tileDestroyer.currentMiningTile;
 
