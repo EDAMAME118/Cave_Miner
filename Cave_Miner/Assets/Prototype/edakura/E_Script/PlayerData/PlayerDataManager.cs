@@ -36,7 +36,7 @@ public class PlayerDataManager : MonoBehaviour
     public float playerSpeed;
 
     //現在選択中のステージ
-    public Stage currentStage = Stage.STAGE1;
+    public Stage currentStage = 0;
 
     public Vector2 miningRange = Vector2.zero;
     public Vector2 miningRangeOffset = Vector2.zero;
