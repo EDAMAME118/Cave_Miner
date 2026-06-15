@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -7,7 +8,10 @@ public class StageSelectManager : MonoBehaviour
 {
     //ステージ名配列
     [SerializeField]
-    private string[] caveScenes;
+    private string[] caveSceneNames;
+
+
+    private int stageSelectIndex;
 
     //通知テキスト
     [SerializeField]
@@ -20,6 +24,11 @@ public class StageSelectManager : MonoBehaviour
     //総額表示テキスト
     [SerializeField]
     private Text totalMoneyText;
+
+    //ステージ画像
+    [SerializeField] private Image stage1Image;
+    [SerializeField] private Image stage2Image;
+    [SerializeField] private Image stage3Image;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -68,6 +77,72 @@ public class StageSelectManager : MonoBehaviour
             }
         }
 
+        //ステージを左右キーで選択
+        if(Keyboard.current.leftArrowKey.wasPressedThisFrame)
+        {
+            stageSelectIndex--;
+        }
+        else if(Keyboard.current.rightArrowKey.wasPressedThisFrame)
+        {
+            stageSelectIndex++;
+        }
+
+        //ステージ数を超えて右に行ったら
+        if(stageSelectIndex > (int)Stage.STAGE3)
+        {
+            //ステージを左に戻す
+            stageSelectIndex = (int)Stage.STAGE1;
+        }
+        //左に行ったら
+        else if(stageSelectIndex < (int)Stage.STAGE1)
+        {
+            stageSelectIndex = (int)Stage.STAGE3;
+        }
+
+        //Enterキーでステージを決定し、移動
+        if(Keyboard.current.enterKey.wasPressedThisFrame)
+        {
+            //選択しているのがステージ１ならば
+            if(stageSelectIndex == (int)Stage.STAGE1)
+            {
+                //シーン移動
+                StageChanger();
+            }
+            //選択しているのがステージ２ならば
+            else if (stageSelectIndex == (int)Stage.STAGE2)
+            {
+                //総スコアチェック
+                if (ScoreManager.Instance.totalScore > 50000)
+                {
+                    PlayerDataManager.Instance.currentStage = Stage.STAGE2;
+                    //シーン移動
+                    StageChanger();
+                }
+                else
+                {
+                    ShowNotify("お金が足りません");
+                }
+            }
+            //選択しているのがステージ３ならば
+            else if (stageSelectIndex == (int)Stage.STAGE3)
+            {
+                //総スコアチェック
+                if (ScoreManager.Instance.totalScore > 100000)
+                {
+                    PlayerDataManager.Instance.currentStage = Stage.STAGE3;
+                    //シーン移動
+                    StageChanger();
+                }
+                else
+                {
+                    ShowNotify("お金が足りません");
+                }
+            }
+        }
+
+        //ステージ画像の色変更
+        StageImageColorChanger();
+
         //通知テキストのカウントダウン処理
         if (notifyTimer > 0)
         {
@@ -78,21 +153,7 @@ public class StageSelectManager : MonoBehaviour
             }
         }
 
-        //シーン移動
-        if (Keyboard.current.enterKey.wasPressedThisFrame)
-        {
-            //現在のステージ番号
-            int stageIndex = (int)PlayerDataManager.Instance.currentStage;
 
-            //現在のステージ番号がステージ名配列の長さを超えていないか
-            //見ているステージ配列の要素がNULLではないか
-            if (stageIndex >= 0 && stageIndex < caveScenes.Length && !string.IsNullOrEmpty(caveScenes[stageIndex]))
-            {
-                //現在選ばれているステージ番号のステージに移動する
-                SceneManager.LoadScene(caveScenes[stageIndex]);
-            }
-            
-        }
     }
 
     /// <summary>
@@ -103,5 +164,58 @@ public class StageSelectManager : MonoBehaviour
     {
         NotifyText.text = NText;
         notifyTimer = DisplayDuration;
+    }
+
+    /// <summary>
+    /// ステージ画像選択時の色変更
+    /// </summary>
+    void StageImageColorChanger()
+    {
+        //ステージ画像の色変更
+        //ステージ１
+        if (stageSelectIndex == (int)Stage.STAGE1)
+        {
+            stage1Image.color = new Color32(140, 140, 255, 255);
+        }
+        else
+        {
+            stage1Image.color = new Color32(255, 255, 255, 255);
+        }
+
+        //ステージ２
+        if (stageSelectIndex == (int)Stage.STAGE2)
+        {
+            stage2Image.color = new Color32(140, 140, 255, 255);
+        }
+        else
+        {
+            stage2Image.color = new Color32(255, 255, 255, 255);
+        }
+        //ステージ３
+        if (stageSelectIndex == (int)Stage.STAGE3)
+        {
+            stage3Image.color = new Color32(140, 140, 255, 255);
+        }
+        else
+        {
+            stage3Image.color = new Color32(255, 255, 255, 255);
+        }
+    }
+
+    /// <summary>
+    /// ステージ移動
+    /// </summary>
+    void StageChanger()
+    {
+        //現在のステージ番号
+        int stageIndex = (int)PlayerDataManager.Instance.currentStage;
+
+        //現在のステージ番号がステージ名配列の長さを超えていないか
+        //見ているステージ配列の要素がNULLではないか
+        if (stageIndex >= 0 && stageIndex < caveSceneNames.Length && !string.IsNullOrEmpty(caveSceneNames[stageIndex]))
+        {
+            //現在選ばれているステージ番号のステージに移動する
+            SceneManager.LoadScene(caveSceneNames[stageIndex]);
+        }
     }
 }

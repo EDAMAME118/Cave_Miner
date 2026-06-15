@@ -19,6 +19,10 @@ public class E_UpgradeScript : MonoBehaviour
 
 
     //長押し用タイマー
+    private float holdTimerZKey = 0.0f;
+    //今どの強化項目を選択しているか
+    private int upgradeSelectIndex = (int)Upgrade.MINING_SPEED;
+
     private float holdTimer1Key = 0.0f;
     private float holdTimer2Key = 0.0f;
     private float holdTimer3Key = 0.0f;
