@@ -87,7 +87,25 @@ public class E_UpgradeScript : MonoBehaviour
             RangeText.text   = $"{PlayerDataManager.Instance.RangeScore}円";
             RangeLevelText.text = $"採掘範囲 Lv{PlayerDataManager.Instance.RangeLevel}";
         }
-        
+
+        if(Keyboard.current.rightArrowKey.wasPressedThisFrame)
+        {
+            upgradeSelectIndex++;
+        }
+        else if(Keyboard.current.leftArrowKey.wasPressedThisFrame)
+        {
+            upgradeSelectIndex--;
+        }
+
+        if(upgradeSelectIndex > 3)
+        {
+            upgradeSelectIndex = 0;
+        }
+        else if(upgradeSelectIndex < 0)
+        {
+            upgradeSelectIndex = 2;
+        }
+
 
         //通知テキストのカウントダウン処理
         if (notifyTimer > 0)
