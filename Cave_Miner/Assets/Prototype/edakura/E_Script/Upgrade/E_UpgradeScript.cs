@@ -23,9 +23,6 @@ public class E_UpgradeScript : MonoBehaviour
     //今どの強化項目を選択しているか
     private int upgradeSelectIndex = (int)Upgrade.MINING_SPEED;
 
-    private float holdTimer1Key = 0.0f;
-    private float holdTimer2Key = 0.0f;
-    private float holdTimer3Key = 0.0f;
 
     public string nextSceneName;
 
@@ -64,6 +61,221 @@ public class E_UpgradeScript : MonoBehaviour
         //強化レベル表示
         DiggingLevelText.text = $"採掘速度 Lv{PlayerDataManager.Instance.DiggingLevel}";
 
+        //アップグレード上限を設ける
+        SetUpgradeMaxLevel();
+
+        //左右キーによる強化項目選択
+        if(Keyboard.current.rightArrowKey.wasPressedThisFrame)
+        {
+            upgradeSelectIndex++;
+        }
+        else if(Keyboard.current.leftArrowKey.wasPressedThisFrame)
+        {
+            upgradeSelectIndex--;
+        }
+
+        //強化項目を超えて選択値が移動した場合の処理
+        //右行きすぎたら
+        if(upgradeSelectIndex > 2)
+        {
+            //選択を左端に戻す
+            upgradeSelectIndex = 0;
+        }
+        //左行きすぎたら
+        else if(upgradeSelectIndex < 0)
+        {
+            //選択を右端に戻す
+            upgradeSelectIndex = 2;
+        }
+
+        //選択中のアップグレード項目のテキスト色変え
+        UpgradeTextColorChanger();
+
+
+        //通知テキストのカウントダウン処理
+        if (notifyTimer > 0)
+        {
+            notifyTimer -= Time.deltaTime;
+            if (notifyTimer <= 0)
+            {
+                NotifyText.text = ""; // 時間が来たら消す
+            }
+        }
+
+        //各種ステータスをアップグレード
+        UpgradeStatus();
+        
+        //Enterで次の画面へ移動
+        if (Keyboard.current.enterKey.wasPressedThisFrame)
+        {
+            //シーン移動
+            SceneManager.LoadScene(nextSceneName);
+        }
+
+    }
+
+    /// <summary>
+    /// 採掘速度強化
+    /// </summary>
+    void MiningSpeedUpgrade()
+    {
+        //--採掘速度強化
+        //スコアが足りない場合
+        if (ScoreManager.Instance.score < PlayerDataManager.Instance.DiggingScore)
+        {
+            ShowNotify($"お金が足りません");
+            //アップグレード失敗SE
+            upgradeAudioSource.PlayOneShot(upgradeFailureClip);
+        }
+        //スコアが足りる場合
+        else
+        {
+            //スコアを消費
+            ScoreManager.Instance.score -= PlayerDataManager.Instance.DiggingScore;
+            //必要スコアを上昇
+            PlayerDataManager.Instance.DiggingScore += 500;
+            //プレイヤーの採掘速度を上昇
+            PlayerDataManager.Instance.playerDigSpeed += 0.2f;
+            //レベル上昇
+            PlayerDataManager.Instance.DiggingLevel += 1;
+
+            //アップグレード成功SE
+            upgradeAudioSource.PlayOneShot(upgradeSuccessClip);
+            ShowNotify($"採掘速度アップグレード完了");
+        }
+    }
+
+    /// <summary>
+    /// 移動速度強化
+    /// </summary>
+    void MoveSpeedUpgrade()
+    {
+        //移動速度レベルがすでにMAXに達している場合
+        if (PlayerDataManager.Instance.SpeedLevel >= 50)
+        {
+            ShowNotify("移動速度はすでにMAXです");
+        }
+        else
+        {
+            //--移動速度強化
+            //スコアが足りない場合
+            if (ScoreManager.Instance.score < PlayerDataManager.Instance.SpeedScore)
+            {
+                ShowNotify($"お金が足りません");
+                //アップグレード失敗SE
+                upgradeAudioSource.PlayOneShot(upgradeFailureClip);
+
+            }
+            //スコアが足りる場合
+            else
+            {
+                //スコアを消費
+                ScoreManager.Instance.score -= PlayerDataManager.Instance.SpeedScore;
+                //必要スコアを上昇
+                PlayerDataManager.Instance.SpeedScore += 300;
+                //プレイヤーの移動速度を上昇
+                PlayerDataManager.Instance.playerSpeed += 0.1f;
+                //レベル上昇
+                PlayerDataManager.Instance.SpeedLevel += 1;
+
+                //アップグレード成功SE
+                upgradeAudioSource.PlayOneShot(upgradeSuccessClip);
+                ShowNotify($"移動速度アップグレード完了");
+            }
+        }
+    }
+
+    /// <summary>
+    /// 採掘範囲強化
+    /// </summary>
+    void MiningRangeUpgrade()
+    {
+        //採掘範囲レベルがすでに上限に達している場合
+        if (PlayerDataManager.Instance.RangeLevel >= 5)
+        {
+            ShowNotify($"採掘範囲はすでにMAXです");
+
+        }
+        else
+        {
+            //--採掘範囲強化
+            //スコアが足りない場合
+            if (ScoreManager.Instance.score < PlayerDataManager.Instance.RangeScore)
+            {
+                ShowNotify($"お金が足りません");
+                //アップグレード失敗SE
+                upgradeAudioSource.PlayOneShot(upgradeFailureClip);
+
+            }
+            //スコアが足りる場合
+            else
+            {
+                //スコアを消費
+                ScoreManager.Instance.score -= PlayerDataManager.Instance.RangeScore;
+                //必要スコアを上昇
+                PlayerDataManager.Instance.RangeScore += 20000;
+                //採掘範囲上昇
+                PlayerDataManager.Instance.miningRange += new Vector2(0.5f, 0.5f);
+                PlayerDataManager.Instance.miningRangeOffset -= new Vector2(PlayerDataManager.Instance.miningRangeOffset.x, 0.25f);
+                //レベル上昇
+                PlayerDataManager.Instance.RangeLevel += 1;
+
+                //アップグレード成功SE
+                upgradeAudioSource.PlayOneShot(upgradeSuccessClip);
+                ShowNotify($"採掘範囲アップグレード完了");
+            }
+        }
+    }
+
+    /// <summary>
+    /// 強化時テキスト表示用関数
+    /// </summary>
+    /// <param name="NText"></param>
+    void ShowNotify(string NText)
+    {
+        NotifyText.text = NText;
+        notifyTimer = DisplayDuration;
+    }
+
+    /// <summary>
+    /// 選択項目のテキストを色変え
+    /// </summary>
+    void UpgradeTextColorChanger()
+    {
+        //強化項目テキストの色変え
+        if (upgradeSelectIndex == (int)Upgrade.MINING_SPEED)
+        {
+            DiggingText.color = new Color32(255, 0, 0, 255);
+        }
+        else
+        {
+            DiggingText.color = new Color32(50, 50, 50, 255);
+        }
+
+        if (upgradeSelectIndex == (int)Upgrade.MOVE_SPEED)
+        {
+            SpeedText.color = new Color32(255, 0, 0, 255);
+        }
+        else
+        {
+            SpeedText.color = new Color32(50, 50, 50, 255);
+        }
+
+        if (upgradeSelectIndex == (int)Upgrade.MINING_RANGE)
+        {
+            RangeText.color = new Color32(255, 0, 0, 255);
+        }
+        else
+        {
+            RangeText.color = new Color32(50, 50, 50, 255);
+        }
+    }
+
+    /// <summary>
+    /// アップグレード上限を設ける
+    /// </summary>
+    void SetUpgradeMaxLevel()
+    {
         //移動速度の上限を設けておく
         if (PlayerDataManager.Instance.SpeedLevel >= 50)
         {
@@ -84,259 +296,50 @@ public class E_UpgradeScript : MonoBehaviour
         }
         else
         {
-            RangeText.text   = $"{PlayerDataManager.Instance.RangeScore}円";
+            RangeText.text = $"{PlayerDataManager.Instance.RangeScore}円";
             RangeLevelText.text = $"採掘範囲 Lv{PlayerDataManager.Instance.RangeLevel}";
         }
-
-        //左右キーによる強化項目選択
-        if(Keyboard.current.rightArrowKey.wasPressedThisFrame)
-        {
-            upgradeSelectIndex++;
-        }
-        else if(Keyboard.current.leftArrowKey.wasPressedThisFrame)
-        {
-            upgradeSelectIndex--;
-        }
-
-        //強化項目を超えて選択値が移動した場合の処理
-        if(upgradeSelectIndex > 2)
-        {
-            upgradeSelectIndex = 0;
-        }
-        else if(upgradeSelectIndex < 0)
-        {
-            upgradeSelectIndex = 2;
-        }
-
-        //強化項目テキストの色変え
-        if(upgradeSelectIndex == (int)Upgrade.MINING_SPEED)
-        {
-            DiggingText.color = new Color32(255, 0, 0, 255);
-        }
-        else
-        {
-            DiggingText.color = new Color32(50, 50, 50, 255);
-        }
-
-        if (upgradeSelectIndex == (int)Upgrade.MOVE_SPEED)
-        {
-            SpeedText.color = new Color32(255, 0, 0, 255);
-        }
-        else
-        {
-            SpeedText.color = new Color32(50, 50, 50, 255);
-        }
-
-        if(upgradeSelectIndex == (int)Upgrade.MINING_RANGE)
-        {
-            RangeText.color = new Color32(255, 0, 0, 255);
-        }
-        else
-        {
-            RangeText.color = new Color32(50, 50, 50, 255);
-        }
-
-
-        //通知テキストのカウントダウン処理
-        if (notifyTimer > 0)
-        {
-            notifyTimer -= Time.deltaTime;
-            if (notifyTimer <= 0)
-            {
-                NotifyText.text = ""; // 時間が来たら消す
-            }
-        }
-
-
-        //--強化ボタン押下時の動作
-        MiningSpeedUpgrade();
-
-        MoveSpeedUpdate();
-
-        MiningRangeUpgrade();
-        
-
-        //Enterで次の画面へ移動
-        if (Keyboard.current.enterKey.wasPressedThisFrame)
-        {
-            //シーン移動
-            SceneManager.LoadScene(nextSceneName);
-        }
-
     }
 
     /// <summary>
-    /// 採掘速度強化
+    /// 各種ステータスをアップグレード
     /// </summary>
-    void MiningSpeedUpgrade()
+    void UpgradeStatus()
     {
-        //1キー
-        //長押しされてるか、単押しか
-        if (Keyboard.current.digit1Key.isPressed)
+        //長押し/アップグレード
+        if (Keyboard.current.zKey.isPressed)
         {
-            //タイマー加算
-            holdTimer1Key += Time.deltaTime;
+            //Zキータイマー加算
+            holdTimerZKey += Time.deltaTime;
 
-            //強化キー押された瞬間か、タイマーが閾値超えてるか
-            if (Keyboard.current.digit1Key.wasPressedThisFrame || holdTimer1Key > 1.0f)
+            //単押しかタイマーが閾値超えてるか
+            if (Keyboard.current.zKey.wasPressedThisFrame || holdTimerZKey > 1.0f)
             {
-                //--採掘速度強化
-                //スコアが足りない場合
-                if (ScoreManager.Instance.score < PlayerDataManager.Instance.DiggingScore)
+                //採掘速度
+                if (upgradeSelectIndex == (int)Upgrade.MINING_SPEED)
                 {
-                    ShowNotify($"お金が足りません");
-                    //アップグレード失敗SE
-                    upgradeAudioSource.PlayOneShot(upgradeFailureClip);
+                    MiningSpeedUpgrade();
+                    Debug.Log("1");
                 }
-                //スコアが足りる場合
-                else
+                //移動速度
+                else if (upgradeSelectIndex == (int)Upgrade.MOVE_SPEED)
                 {
-                    //スコアを消費
-                    ScoreManager.Instance.score -= PlayerDataManager.Instance.DiggingScore;
-                    //必要スコアを上昇
-                    PlayerDataManager.Instance.DiggingScore += 500;
-                    //プレイヤーの採掘速度を上昇
-                    PlayerDataManager.Instance.playerDigSpeed += 0.2f;
-                    //レベル上昇
-                    PlayerDataManager.Instance.DiggingLevel += 1;
-
-                    //アップグレード成功SE
-                    upgradeAudioSource.PlayOneShot(upgradeSuccessClip);
-                    ShowNotify($"採掘速度アップグレード完了");
+                    MoveSpeedUpgrade();
+                    Debug.Log("2");
+                }
+                //採掘範囲
+                else if (upgradeSelectIndex == (int)Upgrade.MINING_RANGE)
+                {
+                    MiningRangeUpgrade();
+                    Debug.Log("3");
                 }
             }
+
         }
         else
         {
-            //長押しされてないならタイマーを0に
-            holdTimer1Key = 0.0f;
+            //長押しされていないなら、タイマーを０に
+            holdTimerZKey = 0;
         }
     }
-
-    /// <summary>
-    /// 移動速度強化
-    /// </summary>
-    void MoveSpeedUpdate()
-    {
-        //2キー
-        //長押しされてるか、単押しか
-        if (Keyboard.current.digit2Key.isPressed)
-        {
-            //タイマー加算
-            holdTimer2Key += Time.deltaTime;
-
-            //強化キー押された瞬間か、タイマーが閾値超えてるか
-            if (Keyboard.current.digit2Key.wasPressedThisFrame || holdTimer2Key > 1.0f)
-            {
-                //移動速度レベルがすでにMAXに達している場合
-                if (PlayerDataManager.Instance.SpeedLevel >= 50)
-                {
-                    ShowNotify("移動速度はすでにMAXです");
-                }
-                else
-                {
-                    //--移動速度強化
-                    //スコアが足りない場合
-                    if (ScoreManager.Instance.score < PlayerDataManager.Instance.SpeedScore)
-                    {
-                        ShowNotify($"お金が足りません");
-                        //アップグレード失敗SE
-                        upgradeAudioSource.PlayOneShot(upgradeFailureClip);
-
-                    }
-                    //スコアが足りる場合
-                    else
-                    {
-                        //スコアを消費
-                        ScoreManager.Instance.score -= PlayerDataManager.Instance.SpeedScore;
-                        //必要スコアを上昇
-                        PlayerDataManager.Instance.SpeedScore += 300;
-                        //プレイヤーの移動速度を上昇
-                        PlayerDataManager.Instance.playerSpeed += 0.1f;
-                        //レベル上昇
-                        PlayerDataManager.Instance.SpeedLevel += 1;
-
-                        //アップグレード成功SE
-                        upgradeAudioSource.PlayOneShot(upgradeSuccessClip);
-                        ShowNotify($"移動速度アップグレード完了");
-                    }
-                }
-            }
-        }
-        else
-        {
-            //長押しされてないならタイマーを0に
-            holdTimer2Key = 0.0f;
-        }
-    }
-
-    /// <summary>
-    /// 採掘範囲強化
-    /// </summary>
-    void MiningRangeUpgrade()
-    {
-        //3キー
-        //長押しされてるか、単押しか
-        if (Keyboard.current.digit3Key.isPressed)
-        {
-            //タイマー加算
-            holdTimer3Key += Time.deltaTime;
-            
-            //強化キー押された瞬間か、タイマーが閾値超えてるか
-            if (Keyboard.current.digit3Key.wasPressedThisFrame || holdTimer3Key > 1.0f)
-            {
-                //採掘範囲レベルがすでに上限に達している場合
-                if (PlayerDataManager.Instance.RangeLevel >= 5)
-                {
-                    ShowNotify($"採掘範囲はすでにMAXです");
-
-                }
-                else
-                {
-                    //--採掘範囲強化
-                    //スコアが足りない場合
-                    if (ScoreManager.Instance.score < PlayerDataManager.Instance.RangeScore)
-                    {
-                        ShowNotify($"お金が足りません");
-                        //アップグレード失敗SE
-                        upgradeAudioSource.PlayOneShot(upgradeFailureClip);
-
-                    }
-                    //スコアが足りる場合
-                    else
-                    {
-                        //スコアを消費
-                        ScoreManager.Instance.score -= PlayerDataManager.Instance.RangeScore;
-                        //必要スコアを上昇
-                        PlayerDataManager.Instance.RangeScore += 20000;
-                        //採掘範囲上昇
-                        PlayerDataManager.Instance.miningRange += new Vector2(0.5f, 0.5f);
-                        PlayerDataManager.Instance.miningRangeOffset -= new Vector2(PlayerDataManager.Instance.miningRangeOffset.x, 0.25f);
-                        //レベル上昇
-                        PlayerDataManager.Instance.RangeLevel += 1;
-
-                        //アップグレード成功SE
-                        upgradeAudioSource.PlayOneShot(upgradeSuccessClip);
-                        ShowNotify($"採掘範囲アップグレード完了");
-                    }
-                }
-            }
-        }
-        else
-        { 
-            //長押しされてないならタイマーを0に
-            holdTimer3Key = 0.0f;
-        }
-    }
-
-    /// <summary>
-    /// 強化時テキスト表示用関数
-    /// </summary>
-    /// <param name="NText"></param>
-    void ShowNotify(string NText)
-    {
-        NotifyText.text = NText;
-        notifyTimer = DisplayDuration;
-    }
-
 }
