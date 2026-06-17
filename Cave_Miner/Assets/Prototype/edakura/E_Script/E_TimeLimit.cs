@@ -6,9 +6,10 @@ using UnityEngine.UI;
 public class E_TimeLimit : MonoBehaviour
 {
     //時間制限
-    public int TimeLimit;
-    private int secondsTime;
-    private int minutesTime;
+    private int TimeLimit;
+
+    private int secondsTime; //秒数表示
+    private int minutesTime; //分表示
 
     //1秒計測
     private float timeInterval;
@@ -22,6 +23,7 @@ public class E_TimeLimit : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        TimeLimit = 120;
         timeInterval = 0f;
     }
 
@@ -46,8 +48,10 @@ public class E_TimeLimit : MonoBehaviour
             timeInterval -= 1.0f;
         }
 
+        //制限時間が０になったら
         if(TimeLimit < 0)
         {
+            //シーンを移動する
             SceneManager.LoadScene(nextSceneBuy);
         }
 
