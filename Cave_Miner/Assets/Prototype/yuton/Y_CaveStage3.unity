@@ -14717,11 +14717,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a44f2b60a97837b45970466133c7b52d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TileCracks
-  tileDestroyer: {fileID: 0}
-  crackTilemap: {fileID: 0}
-  crack1Tile: {fileID: 0}
-  crack2Tile: {fileID: 0}
-  crack3Tile: {fileID: 0}
+  tileDestroyer: {fileID: 875511153}
+  crackTilemap: {fileID: 193081671}
+  crack1Tile: {fileID: 11400000, guid: 10b69203f372ec942a2b222faa55fa48, type: 2}
+  crack2Tile: {fileID: 11400000, guid: 0dd730957a72e1348b71ab8a63551999, type: 2}
+  crack3Tile: {fileID: 11400000, guid: c3dca558f172b5344832a45c4b6236da, type: 2}
 --- !u!1 &1670420166
 GameObject:
   m_ObjectHideFlags: 0

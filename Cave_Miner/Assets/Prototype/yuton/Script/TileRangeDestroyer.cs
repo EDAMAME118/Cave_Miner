@@ -39,6 +39,27 @@ public class TileRangeDestroyer : MonoBehaviour
         Vector3Int minCell = targetTilemap.WorldToCell(bounds.min);
         Vector3Int maxCell = targetTilemap.WorldToCell(bounds.max);
 
+        List<Vector3Int> removeList = new List<Vector3Int>();
+
+        foreach (var pair in digProgress)
+        {
+            Vector3Int pos = pair.Key;
+
+            bool isOutside =
+                pos.x < minCell.x || pos.x > maxCell.x ||
+                pos.y < minCell.y || pos.y > maxCell.y;
+
+            if (isOutside)
+            {
+                removeList.Add(pos);
+            }
+        }
+
+        foreach (var pos in removeList)
+        {
+            digProgress.Remove(pos);
+        }
+
         // ゲージ計算用に、このフレームでの「最大進捗率」を一時的に記録する変数
         float maxProgressRatio = 0f;
 
@@ -138,26 +159,27 @@ public class TileRangeDestroyer : MonoBehaviour
             DestroyTilesInBounds();
 
             // 【修正】「現在の秒数 / 必要時間」で0.0〜1.0の割合にしてゲージに代入
-            if (gaugeFillImage != null && requiredTime > 0f)
+            if (gaugeFillImage != null || requiredTime > 0f)
             {
                 gaugeFillImage.fillAmount = Mathf.Clamp01(currentdigtime / requiredTime);
             }
         }
         else
         {
-            // キーを離したら、すべてのブロックの「掘り途中の時間」をリセットする
+           // キーを離したら、すべてのブロックの「掘り途中の時間」をリセットする
             if (digProgress.Count > 0)
             {
                 digProgress.Clear();
             }
 
-            // 【追加】キーを離したらゲージもゼロにする
-            currentdigtime = 0f;
+                // 【追加】キーを離したらゲージもゼロにする
+                currentdigtime = 0f;
             if (gaugeFillImage != null)
             {
                 gaugeFillImage.fillAmount = 0f;
             }
-        }
+        } 
+        
 
         // デバッグ用隠しコマンド
         if (Keyboard.current.f1Key.isPressed && Keyboard.current.f2Key.isPressed && Keyboard.current.enterKey.isPressed)
