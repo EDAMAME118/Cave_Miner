@@ -22,6 +22,7 @@ public class TileRangeDestroyer : MonoBehaviour
     // [タイルの座標, 掘り続けた時間] をセットで保存します
     private Dictionary<Vector3Int, float> digProgress = new Dictionary<Vector3Int, float>();
 
+    public Dictionary<Vector3Int, float> DigProgress => digProgress;
     void Start()
     {
         destroyRange = GetComponent<Transform>();

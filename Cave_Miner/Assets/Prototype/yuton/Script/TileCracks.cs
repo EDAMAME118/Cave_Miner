@@ -1,48 +1,53 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using System.Collections.Generic;
 
 public class TileCracks : MonoBehaviour
 {
     [SerializeField] private TileRangeDestroyer tileDestroyer;
 
-    [Header("ひび割れ画像")]
-    [SerializeField] private Sprite crack1;
-    [SerializeField] private Sprite crack2;
-    [SerializeField] private Sprite crack3;
+    [SerializeField] private Tilemap crackTilemap;
 
-    [SerializeField] private SpriteRenderer crackRenderer;
+    [SerializeField] private TileBase crack1Tile;
+    [SerializeField] private TileBase crack2Tile;
+    [SerializeField] private TileBase crack3Tile;
 
     void Update()
     {
-        float requiredTime = tileDestroyer.RequiredTime;
-        float currentTime = tileDestroyer.CurrentDigTime;
-        // 掘っているタイル座標
-        Vector3Int tilePos = tileDestroyer.currentMiningTile;
+        // 一旦全部消す
+        crackTilemap.ClearAllTiles();
 
-        // タイル中心へ移動
-        crackRenderer.transform.position =
-            tileDestroyer.targetTilemap.GetCellCenterWorld(tilePos);
+        foreach (KeyValuePair<Vector3Int, float> pair in tileDestroyer.DigProgress)
+        {
+            Vector3Int tilePos = pair.Key;
+            float currentTime = pair.Value;
 
-        float progress = currentTime / requiredTime;
+            TileBase tile = tileDestroyer.targetTilemap.GetTile(tilePos);
 
-        if (progress >= 0.75f)
-        {
-            crackRenderer.sprite = crack3;
-            crackRenderer.enabled = true;
-        }
-        else if (progress >= 0.5f)
-        {
-            crackRenderer.sprite = crack2;
-            crackRenderer.enabled = true;
-        }
-        else if (progress >= 0.25f)
-        {
-            crackRenderer.sprite = crack1;
-            crackRenderer.enabled = true;
-        }
-        else
-        {
-            crackRenderer.enabled = false;
+            if (tile == null)
+                continue;
+
+            float requiredTime = 3f;
+
+            if (tile is ScoreTile scoreTile)
+            {
+                requiredTime = scoreTile.mining_soeed;
+            }
+
+            float progress = currentTime / requiredTime;
+
+            if (progress >= 0.75f)
+            {
+                crackTilemap.SetTile(tilePos, crack3Tile);
+            }
+            else if (progress >= 0.5f)
+            {
+                crackTilemap.SetTile(tilePos, crack2Tile);
+            }
+            else if (progress >= 0.25f)
+            {
+                crackTilemap.SetTile(tilePos, crack1Tile);
+            }
         }
     }
 }
