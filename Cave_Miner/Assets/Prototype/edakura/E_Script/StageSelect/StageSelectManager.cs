@@ -105,6 +105,8 @@ public class StageSelectManager : MonoBehaviour
             //選択しているのがステージ１ならば
             if(stageSelectIndex == (int)Stage.STAGE1)
             {
+                //ステージ設定
+                PlayerDataManager.Instance.currentStage = Stage.STAGE1;
                 //シーン移動
                 StageChanger();
             }
@@ -114,6 +116,7 @@ public class StageSelectManager : MonoBehaviour
                 //総スコアチェック
                 if (ScoreManager.Instance.totalScore > 50000)
                 {
+                    //ステージ設定
                     PlayerDataManager.Instance.currentStage = Stage.STAGE2;
                     //シーン移動
                     StageChanger();
@@ -129,6 +132,7 @@ public class StageSelectManager : MonoBehaviour
                 //総スコアチェック
                 if (ScoreManager.Instance.totalScore > 100000)
                 {
+                    //ステージ設定
                     PlayerDataManager.Instance.currentStage = Stage.STAGE3;
                     //シーン移動
                     StageChanger();
