@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class TileRangeDestroyer : MonoBehaviour
 {
     [SerializeField] private Image gaugeFillImage;
+    [SerializeField] private GameObject breakParticlePrefab;
     public Tilemap targetTilemap;
     
     private Transform destroyRange;
@@ -107,6 +108,15 @@ public class TileRangeDestroyer : MonoBehaviour
                     {
                         // タイルを破壊
                         targetTilemap.SetTile(targetPos, null);
+
+                        // タイルの中央座標を取得
+                        Vector3 worldPos = targetTilemap.GetCellCenterWorld(targetPos);
+
+                        // パーティクル生成
+                        Instantiate(
+                            breakParticlePrefab,
+                            worldPos,
+                            Quaternion.identity);
 
                         // --- スコア加算処理 ---
                         if (tile is ScoreTile destroyedScoreTile)
