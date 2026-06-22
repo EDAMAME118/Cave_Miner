@@ -521,6 +521,10 @@ PrefabInstance:
       propertyPath: gaugeFillImage
       value: 
       objectReference: {fileID: 1292369851}
+    - target: {fileID: 4390711218864344873, guid: 09c7422961086684bba4dcf29fd198c9, type: 3}
+      propertyPath: breakParticlePrefab
+      value: 
+      objectReference: {fileID: 5876248476935593079, guid: 84251877bb534f64ba25aee87c4aa800, type: 3}
     - target: {fileID: 4724262095457299753, guid: 09c7422961086684bba4dcf29fd198c9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.1682436
@@ -997,7 +1001,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c9606735986d1a4db995d4d83a10a2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::E_TimeLimit
-  TimeLimit: 20
   timeText: {fileID: 464275369}
   nextSceneBuy: E_ResultScene
 --- !u!4 &1096279536
