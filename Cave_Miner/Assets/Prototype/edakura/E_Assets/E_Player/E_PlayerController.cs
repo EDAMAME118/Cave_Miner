@@ -74,7 +74,7 @@ public class E_PlayerController : MonoBehaviour
             {
                 Debug.Log("‘«‰¹Ä¶");
                 //Œø‰Ê‰¹Ä¶
-                audioSource.PlayOneShot(walkClip);
+                //audioSource.PlayOneShot(walkClip);
                 walkAudioDelay = 0.0f;
             }
         }

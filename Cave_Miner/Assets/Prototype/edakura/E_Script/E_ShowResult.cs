@@ -15,4 +15,4 @@ public class E_ShowResult : MonoBehaviour
         showMiningCountText.text = $"¡‰ñ‚ÌÌŒ@ŒÂ”:{ScoreManager.Instance.dayMiningCount}\n" +
                                    $"Œ»İ‚Ì‡ŒvÌŒ@ŒÂ”:{ScoreManager.Instance.miningCount}";
     }
-}
+ }
