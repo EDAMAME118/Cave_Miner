@@ -6,8 +6,15 @@ using UnityEngine.UI;
 
 public class TileRangeDestroyer : MonoBehaviour
 {
+    //SE
+    AudioSource audiosource;
+    [SerializeField] private AudioClip[] digClip;//採掘音 
+    [SerializeField] AudioClip breakClip;//破壊音
+    [SerializeField] private float miningaudioDelay = 0.0f;
+
     [SerializeField] private Image gaugeFillImage;
     [SerializeField] private GameObject breakParticlePrefab;
+
     public Tilemap targetTilemap;
     
     private Transform destroyRange;
@@ -26,6 +33,8 @@ public class TileRangeDestroyer : MonoBehaviour
     public Dictionary<Vector3Int, float> DigProgress => digProgress;
     void Start()
     {
+        audiosource = GetComponent<AudioSource>();
+
         destroyRange = GetComponent<Transform>();
         destroyRange.localScale = PlayerDataManager.Instance.miningRange;
         destroyRange.localPosition = PlayerDataManager.Instance.miningRangeOffset;
@@ -77,6 +86,18 @@ public class TileRangeDestroyer : MonoBehaviour
                     if (!digProgress.ContainsKey(targetPos))
                     {
                         digProgress[targetPos] = 0f;
+                    }
+                    
+                   
+                    if (miningaudioDelay > 0.5f)
+                    {
+                        //SE
+                        int index = Random.Range(0, digClip.Length);
+
+                        //2種類のSEをランダム再生
+                        audiosource.PlayOneShot(digClip[index]);
+
+                        miningaudioDelay = 0.0f;
                     }
 
                     // 2. この特定のブロックの採掘時間だけを進める
@@ -172,7 +193,12 @@ public class TileRangeDestroyer : MonoBehaviour
             if (gaugeFillImage != null || requiredTime > 0f)
             {
                 gaugeFillImage.fillAmount = Mathf.Clamp01(currentdigtime / requiredTime);
+
+                //se間隔を測る変数
+                miningaudioDelay += Time.deltaTime;
+
             }
+            
         }
         else
         {
