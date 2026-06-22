@@ -1,5 +1,7 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Scripting;
 
 public class E_PlayerController : MonoBehaviour
 {
@@ -42,7 +44,7 @@ public class E_PlayerController : MonoBehaviour
         PlayerVector = MoveAction.ReadValue<Vector2>();
 
         currentSpeed = PlayerDataManager.Instance.playerSpeed;
-        
+
         //向きの調整
         if (PlayerVector.x > 0.0f)
         {
@@ -66,11 +68,11 @@ public class E_PlayerController : MonoBehaviour
         }
 
         //プレイヤーが移動している場合
-        if(PlayerVector != Vector2.zero)
+        if (PlayerVector != Vector2.zero)
         {
             //足音用変数加算
             walkAudioDelay += Time.deltaTime;
-            if(walkAudioDelay > 0.5f)
+            if (walkAudioDelay > 0.5f)
             {
                 Debug.Log("足音再生");
                 //効果音再生
@@ -88,4 +90,7 @@ public class E_PlayerController : MonoBehaviour
         //Rigidbodyに速度入れる
         rbody.linearVelocity = PlayerVector * currentSpeed;
     }
+
+
+
 }
