@@ -514,6 +514,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: de6a130bb58464841a664659b1b2d3cf, type: 3}
     - target: {fileID: 4390711218864344873, guid: 09c7422961086684bba4dcf29fd198c9, type: 3}
+      propertyPath: breakClip
+      value: 
+      objectReference: {fileID: 8300000, guid: de6a130bb58464841a664659b1b2d3cf, type: 3}
+    - target: {fileID: 4390711218864344873, guid: 09c7422961086684bba4dcf29fd198c9, type: 3}
       propertyPath: digtimetext
       value: 
       objectReference: {fileID: 0}
