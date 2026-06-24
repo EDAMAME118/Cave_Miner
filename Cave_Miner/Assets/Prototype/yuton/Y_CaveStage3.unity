@@ -510,6 +510,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4390711218864344873, guid: 09c7422961086684bba4dcf29fd198c9, type: 3}
+      propertyPath: breakClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3072d42dd3805c146a09bde1663cab76, type: 3}
+    - target: {fileID: 4390711218864344873, guid: 09c7422961086684bba4dcf29fd198c9, type: 3}
       propertyPath: digtimetext
       value: 
       objectReference: {fileID: 0}
@@ -522,9 +526,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1292369851}
     - target: {fileID: 4390711218864344873, guid: 09c7422961086684bba4dcf29fd198c9, type: 3}
+      propertyPath: digClip.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4390711218864344873, guid: 09c7422961086684bba4dcf29fd198c9, type: 3}
       propertyPath: breakParticlePrefab
       value: 
       objectReference: {fileID: 5876248476935593079, guid: 84251877bb534f64ba25aee87c4aa800, type: 3}
+    - target: {fileID: 4390711218864344873, guid: 09c7422961086684bba4dcf29fd198c9, type: 3}
+      propertyPath: 'digClip.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: de6a130bb58464841a664659b1b2d3cf, type: 3}
+    - target: {fileID: 4390711218864344873, guid: 09c7422961086684bba4dcf29fd198c9, type: 3}
+      propertyPath: 'digClip.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 4557452f83ea51b40acd300a34e36c91, type: 3}
     - target: {fileID: 4724262095457299753, guid: 09c7422961086684bba4dcf29fd198c9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.1682436
