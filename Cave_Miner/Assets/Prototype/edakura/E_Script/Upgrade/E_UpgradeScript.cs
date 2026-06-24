@@ -18,8 +18,10 @@ public class E_UpgradeScript : MonoBehaviour
     public Text ScoreText;
 
 
-    //長押し用タイマー
-    private float holdTimerZKey = 0.0f;
+    private float holdTimerZKey = 0f;           // 押し続けている時間を測るタイマー
+    private float continuousUpgradeTimer = 0f;  // 連続強化の間隔を測るタイマー
+    private float holdThreshold = 1.0f;         // 長押し判定になるまでの時間（1秒）
+    private float upgradeInterval = 0.1f;       // 長押し中の強化間隔（0.2秒ごとに強化）
     //今どの強化項目を選択しているか
     private int upgradeSelectIndex = (int)Upgrade.MINING_SPEED;
 
@@ -34,7 +36,7 @@ public class E_UpgradeScript : MonoBehaviour
     AudioSource upgradeAudioSource; 
     [SerializeField] private AudioClip upgradeFailureClip;
     [SerializeField] private AudioClip upgradeSuccessClip;
-    [SerializeField] private float upgradeInterval = 0.5f;
+    //[SerializeField] private float upgradeInterval = 0.5f;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -305,42 +307,66 @@ public class E_UpgradeScript : MonoBehaviour
     /// <summary>
     /// 各種ステータスをアップグレード
     /// </summary>
-    void UpgradeStatus()
+    void UpgradeStatus() 
     {
         //長押し/アップグレード
         if (Keyboard.current.zKey.isPressed)
         {
-            //Zキータイマー加算
-            holdTimerZKey += Time.deltaTime * upgradeInterval;
+            bool doUpgrade = false; // 強化処理を実行するかどうかのフラグ
 
-            //単押しかタイマーが閾値超えてるか
-            if (Keyboard.current.zKey.wasPressedThisFrame || holdTimerZKey > 1.0f)
+            // 単押しの瞬間
+            if (Keyboard.current.zKey.wasPressedThisFrame)
             {
-                //採掘速度
+                doUpgrade = true;
+            }
+            else // 押しっ放しの場合
+            {
+                // Zキータイマー加算
+                holdTimerZKey += Time.deltaTime;
+
+                // 長押しの閾値（1秒）を超えたら連続強化モードへ
+                if (holdTimerZKey > holdThreshold)
+                {
+                    continuousUpgradeTimer += Time.deltaTime;
+
+                    // 強化間隔（0.2秒）を超えたら強化フラグを立てる
+                    if (continuousUpgradeTimer >= upgradeInterval)
+                    {
+                        doUpgrade = true;
+                        // インターバル分を引いて、次の強化タイミングに備える
+                        continuousUpgradeTimer -= upgradeInterval;
+                    }
+                }
+            }
+
+            // 強化実行フラグがONなら実際の処理を行う
+            if (doUpgrade)
+            {
+                // 採掘速度
                 if (upgradeSelectIndex == (int)Upgrade.MINING_SPEED)
                 {
                     MiningSpeedUpgrade();
                     Debug.Log("1");
                 }
-                //移動速度
+                // 移動速度
                 else if (upgradeSelectIndex == (int)Upgrade.MOVE_SPEED)
                 {
                     MoveSpeedUpgrade();
                     Debug.Log("2");
                 }
-                //採掘範囲
+                // 採掘範囲
                 else if (upgradeSelectIndex == (int)Upgrade.MINING_RANGE)
                 {
                     MiningRangeUpgrade();
                     Debug.Log("3");
                 }
             }
-
         }
         else
         {
-            //長押しされていないなら、タイマーを０に
-            holdTimerZKey = 0;
+            // キーを離したら、タイマーを両方とも0にリセットする
+            holdTimerZKey = 0f;
+            continuousUpgradeTimer = 0f;
         }
     }
 }
