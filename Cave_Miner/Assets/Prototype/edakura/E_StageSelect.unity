@@ -967,9 +967,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StageSelectManager
   caveSceneNames:
-  - Y_CaveStage1
-  - Y_CaveStage2
-  - Y_CaveStage3
+  - Y_CaveStage0
+  - Y_CaveStage01
+  - Y_CaveStage03
   NotifyText: {fileID: 616410944}
   totalMoneyText: {fileID: 104630369}
   stage1Image: {fileID: 1993584359}

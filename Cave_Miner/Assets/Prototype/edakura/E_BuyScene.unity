@@ -422,7 +422,7 @@ GameObject:
   - component: {fileID: 232392677}
   - component: {fileID: 232392676}
   m_Layer: 0
-  m_Name: ScoreManager (1)
+  m_Name: ScoreManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

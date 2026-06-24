@@ -31,9 +31,10 @@ public class E_UpgradeScript : MonoBehaviour
     private const float DisplayDuration = 2.0f;
 
     //サウンド用
-    AudioSource upgradeAudioSource;
+    AudioSource upgradeAudioSource; 
     [SerializeField] private AudioClip upgradeFailureClip;
     [SerializeField] private AudioClip upgradeSuccessClip;
+    [SerializeField] private float upgradeInterval = 0.5f;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -310,7 +311,7 @@ public class E_UpgradeScript : MonoBehaviour
         if (Keyboard.current.zKey.isPressed)
         {
             //Zキータイマー加算
-            holdTimerZKey += Time.deltaTime;
+            holdTimerZKey += Time.deltaTime * upgradeInterval;
 
             //単押しかタイマーが閾値超えてるか
             if (Keyboard.current.zKey.wasPressedThisFrame || holdTimerZKey > 1.0f)
