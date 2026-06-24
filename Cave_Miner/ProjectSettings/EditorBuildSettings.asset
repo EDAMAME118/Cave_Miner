@@ -20,10 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Prototype/yuton/Y_CaveStage03.unity
     guid: f8ef7b048c47db94e8ffb1c0ed8adcfa
-  - enabled: 1
+  - enabled: 0
     path: Assets/Prototype/yuton/Y_CaveStage2.unity
     guid: 8862eb7cc7a2d32419cb023fe1353582
-  - enabled: 1
+  - enabled: 0
     path: Assets/Prototype/yuton/Y_CaveStage3.unity
     guid: f2970aed6b3219744850d43a64cffe5f
   - enabled: 1
