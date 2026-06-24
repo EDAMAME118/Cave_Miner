@@ -34,6 +34,6 @@ MonoBehaviour:
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
   m_ColliderType: 1
-  scoreValue: 1000
+  scoreValue: 1500
   mining_soeed: 5
   typeName: 
