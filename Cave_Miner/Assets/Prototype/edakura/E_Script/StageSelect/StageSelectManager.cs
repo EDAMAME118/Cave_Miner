@@ -1,4 +1,3 @@
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -43,39 +42,6 @@ public class StageSelectManager : MonoBehaviour
         //総額表示
         totalMoneyText.text  = $"稼いだ総額:{ScoreManager.Instance.totalScore}円";
 
-        //ステージ選択
-        //１キー
-        if (Keyboard.current.digit1Key.wasPressedThisFrame)
-        {
-            PlayerDataManager.Instance.currentStage = Stage.STAGE1;
-            Debug.Log("Stage1選択中");
-        }
-        //２キー
-        else if (Keyboard.current.digit2Key.wasPressedThisFrame)
-        {
-            if (ScoreManager.Instance.totalScore > 50000)
-            {
-                PlayerDataManager.Instance.currentStage = Stage.STAGE2;
-                Debug.Log("Stage2選択中");
-            }
-            else
-            {
-                ShowNotify("お金が足りません");
-            }
-        }
-        //３キー
-        else if (Keyboard.current.digit3Key.wasPressedThisFrame)
-        {
-            if (ScoreManager.Instance.totalScore > 100000)
-            {
-                PlayerDataManager.Instance.currentStage = Stage.STAGE3;
-                Debug.Log("Stage3選択中");
-            }
-            else
-            {
-                ShowNotify("お金が足りません");
-            }
-        }
 
         //ステージを左右キーで選択
         if(Keyboard.current.leftArrowKey.wasPressedThisFrame)
@@ -123,7 +89,8 @@ public class StageSelectManager : MonoBehaviour
                 }
                 else
                 {
-                    ShowNotify("お金が足りません");
+                    ShowNotify($"お金が足りません\n\n" +
+                               $"必要な残り金額：{50000 - ScoreManager.Instance.totalScore}円");
                 }
             }
             //選択しているのがステージ３ならば
@@ -139,7 +106,8 @@ public class StageSelectManager : MonoBehaviour
                 }
                 else
                 {
-                    ShowNotify("お金が足りません");
+                    ShowNotify($"お金が足りません\n\n" + 
+                               $"必要な残り金額：{100000 - ScoreManager.Instance.totalScore}円");
                 }
             }
         }
