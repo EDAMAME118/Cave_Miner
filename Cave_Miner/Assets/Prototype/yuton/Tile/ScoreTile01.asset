@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b120615209ffe6468acd7c78d86f7d6, type: 3}
   m_Name: ScoreTile01
   m_EditorClassIdentifier: Assembly-CSharp::ScoreTile
-  m_Sprite: {fileID: -744525678122816782, guid: 43dc4193fabdb904d9ccda0e5a75e3e9, type: 3}
+  m_Sprite: {fileID: 2912014473201161345, guid: 288231b78e645464688e0340b9b1d9eb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -34,6 +34,6 @@ MonoBehaviour:
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
   m_ColliderType: 1
-  scoreValue: 0
-  mining_soeed: 0
+  scoreValue: 1000
+  mining_soeed: 15
   typeName: 
