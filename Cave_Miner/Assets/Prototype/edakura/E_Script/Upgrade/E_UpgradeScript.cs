@@ -194,7 +194,7 @@ public class E_UpgradeScript : MonoBehaviour
     void MiningRangeUpgrade()
     {
         //採掘範囲レベルがすでに上限に達している場合
-        if (PlayerDataManager.Instance.RangeLevel >= 5)
+        if (PlayerDataManager.Instance.RangeLevel >= 15)
         {
             ShowNotify($"採掘範囲はすでにMAXです");
 
@@ -216,10 +216,10 @@ public class E_UpgradeScript : MonoBehaviour
                 //スコアを消費
                 ScoreManager.Instance.score -= PlayerDataManager.Instance.RangeScore;
                 //必要スコアを上昇
-                PlayerDataManager.Instance.RangeScore += 50000;
+                PlayerDataManager.Instance.RangeScore += (int)System.Math.Ceiling(PlayerDataManager.Instance.RangeScore * 0.5);
                 //採掘範囲上昇
-                PlayerDataManager.Instance.miningRange += new Vector2(0.5f, 0.5f);
-                PlayerDataManager.Instance.miningRangeOffset -= new Vector2(PlayerDataManager.Instance.miningRangeOffset.x, 0.25f);
+                PlayerDataManager.Instance.miningRange += new Vector2(0.25f, 0.25f);
+                PlayerDataManager.Instance.miningRangeOffset -= new Vector2(PlayerDataManager.Instance.miningRangeOffset.x, 0.125f);
                 //レベル上昇
                 PlayerDataManager.Instance.RangeLevel += 1;
 
@@ -283,23 +283,28 @@ public class E_UpgradeScript : MonoBehaviour
         if (PlayerDataManager.Instance.SpeedLevel >= 50)
         {
             SpeedText.text = "LevelMAX";
+            SpeedLevelText.color = new Color32(255, 255, 0, 255);
             SpeedLevelText.text = "移動速度 LvMAX";
         }
         else
         {
             SpeedText.text = $"{PlayerDataManager.Instance.SpeedScore}円";
+            SpeedLevelText.color = new Color32(255, 255, 255, 255);
             SpeedLevelText.text = $"移動速度 Lv{PlayerDataManager.Instance.SpeedLevel}";
         }
 
         //採掘範囲の上限を設けておく
-        if (PlayerDataManager.Instance.RangeLevel >= 5)
+        if (PlayerDataManager.Instance.RangeLevel >= 15)
         {
-            RangeText.text = "LevelMAX";
+
+            RangeText.text  = "LevelMAX";
+            RangeLevelText.color = new Color32(255, 255, 0, 255);
             RangeLevelText.text = "採掘範囲 LvMAX";
         }
         else
         {
             RangeText.text = $"{PlayerDataManager.Instance.RangeScore}円";
+            RangeLevelText.color = new Color32(255, 255, 255,255);
             RangeLevelText.text = $"採掘範囲 Lv{PlayerDataManager.Instance.RangeLevel}";
         }
     }
