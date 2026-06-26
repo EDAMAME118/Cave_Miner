@@ -138,7 +138,7 @@ public class E_UpgradeScript : MonoBehaviour
             //必要スコアを上昇
             PlayerDataManager.Instance.DiggingScore += (int)System.Math.Ceiling(PlayerDataManager.Instance.DiggingScore * 0.1);
             //プレイヤーの採掘速度を上昇
-            PlayerDataManager.Instance.playerDigSpeed += 0.1f;
+            PlayerDataManager.Instance.playerDigSpeed += 0.08f;
             //レベル上昇
             PlayerDataManager.Instance.DiggingLevel += 1;
 
