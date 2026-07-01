@@ -35,5 +35,5 @@ MonoBehaviour:
   m_Flags: 1
   m_ColliderType: 1
   scoreValue: 500
-  mining_soeed: 4
+  mining_soeed: 10
   typeName: 

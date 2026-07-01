@@ -34,6 +34,6 @@ MonoBehaviour:
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
   m_ColliderType: 1
-  scoreValue: 5000
-  mining_soeed: 15
-  typeName: 
+  scoreValue: 4500
+  mining_soeed: 9
+  typeName: DeepGold

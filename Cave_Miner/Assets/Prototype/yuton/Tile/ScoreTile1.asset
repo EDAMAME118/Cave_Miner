@@ -35,5 +35,5 @@ MonoBehaviour:
   m_Flags: 1
   m_ColliderType: 1
   scoreValue: 50000
-  mining_soeed: 20
-  typeName: 
+  mining_soeed: 15
+  typeName: Diamond

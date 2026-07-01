@@ -35,5 +35,5 @@ MonoBehaviour:
   m_Flags: 1
   m_ColliderType: 1
   scoreValue: 500
-  mining_soeed: 2
-  typeName: 
+  mining_soeed: 2.5
+  typeName: Copper

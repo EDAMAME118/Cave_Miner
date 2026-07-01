@@ -578,7 +578,7 @@ MonoBehaviour:
   SpeedLevelText: {fileID: 34784412}
   RangeLevelText: {fileID: 847861378}
   ScoreText: {fileID: 1307418271}
-  nextSceneName: E_StageSelect
+  nextSceneName: Y_CaveStage0
   upgradeFailureClip: {fileID: 8300000, guid: f06686871db8f11468f9d5dc58460d9c, type: 3}
   upgradeSuccessClip: {fileID: 8300000, guid: 67a000dc5fd7b6f4d823676504863d57, type: 3}
 --- !u!4 &262315429
