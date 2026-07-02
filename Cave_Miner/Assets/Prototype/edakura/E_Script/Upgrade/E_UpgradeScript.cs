@@ -36,7 +36,6 @@ public class E_UpgradeScript : MonoBehaviour
     AudioSource upgradeAudioSource; 
     [SerializeField] private AudioClip upgradeFailureClip;
     [SerializeField] private AudioClip upgradeSuccessClip;
-    //[SerializeField] private float upgradeInterval = 0.5f;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -79,16 +78,16 @@ public class E_UpgradeScript : MonoBehaviour
 
         //強化項目を超えて選択値が移動した場合の処理
         //右行きすぎたら
-        if(upgradeSelectIndex > 2)
+        if(upgradeSelectIndex > Constants.UPGRADE_MAX_INDEX)
         {
             //選択を左端に戻す
-            upgradeSelectIndex = 0;
+            upgradeSelectIndex = Constants.UPGRADE_MIN_INDEX;
         }
         //左行きすぎたら
-        else if(upgradeSelectIndex < 0)
+        else if(upgradeSelectIndex < Constants.UPGRADE_MIN_INDEX)
         {
             //選択を右端に戻す
-            upgradeSelectIndex = 2;
+            upgradeSelectIndex = Constants.UPGRADE_MAX_INDEX;
         }
 
         //選択中のアップグレード項目のテキスト色変え
@@ -129,18 +128,26 @@ public class E_UpgradeScript : MonoBehaviour
             ShowNotify($"お金が足りません");
             //アップグレード失敗SE
             upgradeAudioSource.PlayOneShot(upgradeFailureClip);
+
+            return;
         }
         //スコアが足りる場合
         else
         {
             //スコアを消費
             ScoreManager.Instance.score -= PlayerDataManager.Instance.DiggingScore;
-            //必要スコアを上昇
-            PlayerDataManager.Instance.DiggingScore += (int)System.Math.Ceiling(PlayerDataManager.Instance.DiggingScore * 0.1);
+
+            //採掘レベルが70以下の場合
+            if (PlayerDataManager.Instance.DiggingLevel <= Constants.MINING_SPEED_COST_INCREASE_MAX_LEVEL)
+            {
+                //必要スコアを上昇
+                PlayerDataManager.Instance.DiggingScore += (int)System.Math.Ceiling(PlayerDataManager.Instance.DiggingScore * Constants.MINING_SPEED_COST_INCREASE_RATE);
+            }
+
             //プレイヤーの採掘速度を上昇
-            PlayerDataManager.Instance.playerDigSpeed += 0.08f;
+            PlayerDataManager.Instance.playerDigSpeed += Constants.MINING_SPEED_UPGRADE_VALUE;
             //レベル上昇
-            PlayerDataManager.Instance.DiggingLevel += 1;
+            PlayerDataManager.Instance.DiggingLevel += Constants.LEVEL_ADD;
 
             //アップグレード成功SE
             upgradeAudioSource.PlayOneShot(upgradeSuccessClip);
@@ -154,7 +161,7 @@ public class E_UpgradeScript : MonoBehaviour
     void MoveSpeedUpgrade()
     {
         //移動速度レベルがすでにMAXに達している場合
-        if (PlayerDataManager.Instance.SpeedLevel >= 50)
+        if (PlayerDataManager.Instance.SpeedLevel >= Constants.MAX_MOVE_SPEED)
         {
             ShowNotify("移動速度はすでにMAXです");
         }
@@ -175,11 +182,11 @@ public class E_UpgradeScript : MonoBehaviour
                 //スコアを消費
                 ScoreManager.Instance.score -= PlayerDataManager.Instance.SpeedScore;
                 //必要スコアを上昇
-                PlayerDataManager.Instance.SpeedScore += 500;
+                PlayerDataManager.Instance.SpeedScore += (int)System.Math.Ceiling(PlayerDataManager.Instance.SpeedScore * Constants.MOVE_SPEED_COST_INCREASE_RATE);
                 //プレイヤーの移動速度を上昇
-                PlayerDataManager.Instance.playerSpeed += 0.1f;
+                PlayerDataManager.Instance.playerSpeed += Constants.MOVE_SPEED_UPGRADE_VALUE;
                 //レベル上昇
-                PlayerDataManager.Instance.SpeedLevel += 1;
+                PlayerDataManager.Instance.SpeedLevel += Constants.LEVEL_ADD;
 
                 //アップグレード成功SE
                 upgradeAudioSource.PlayOneShot(upgradeSuccessClip);
@@ -194,7 +201,7 @@ public class E_UpgradeScript : MonoBehaviour
     void MiningRangeUpgrade()
     {
         //採掘範囲レベルがすでに上限に達している場合
-        if (PlayerDataManager.Instance.RangeLevel >= 15)
+        if (PlayerDataManager.Instance.RangeLevel >= Constants.MAX_MINING_RANGE)
         {
             ShowNotify($"採掘範囲はすでにMAXです");
 
@@ -216,12 +223,12 @@ public class E_UpgradeScript : MonoBehaviour
                 //スコアを消費
                 ScoreManager.Instance.score -= PlayerDataManager.Instance.RangeScore;
                 //必要スコアを上昇
-                PlayerDataManager.Instance.RangeScore += (int)System.Math.Ceiling(PlayerDataManager.Instance.RangeScore * 0.5);
+                PlayerDataManager.Instance.RangeScore += (int)System.Math.Ceiling(PlayerDataManager.Instance.RangeScore * Constants.MINING_RANGE_COST_INCREASE_RATE);
                 //採掘範囲上昇
-                PlayerDataManager.Instance.miningRange += new Vector2(0.25f, 0.25f);
-                PlayerDataManager.Instance.miningRangeOffset -= new Vector2(PlayerDataManager.Instance.miningRangeOffset.x, 0.125f);
+                PlayerDataManager.Instance.miningRange += new Vector2(Constants.MINING_RANGE_UPGRADE_VALUE, Constants.MINING_RANGE_UPGRADE_VALUE);
+                PlayerDataManager.Instance.miningRangeOffset -= new Vector2(PlayerDataManager.Instance.miningRangeOffset.x, Constants.MINING_RANGE_OFFSET_VALUE);
                 //レベル上昇
-                PlayerDataManager.Instance.RangeLevel += 1;
+                PlayerDataManager.Instance.RangeLevel += Constants.LEVEL_ADD;
 
                 //アップグレード成功SE
                 upgradeAudioSource.PlayOneShot(upgradeSuccessClip);
@@ -280,7 +287,7 @@ public class E_UpgradeScript : MonoBehaviour
     void SetUpgradeMaxLevel()
     {
         //移動速度の上限を設けておく
-        if (PlayerDataManager.Instance.SpeedLevel >= 50)
+        if (PlayerDataManager.Instance.SpeedLevel >= Constants.MAX_MOVE_SPEED)
         {
             SpeedText.text = "LevelMAX";
             SpeedLevelText.color = new Color32(255, 255, 0, 255);
@@ -294,9 +301,8 @@ public class E_UpgradeScript : MonoBehaviour
         }
 
         //採掘範囲の上限を設けておく
-        if (PlayerDataManager.Instance.RangeLevel >= 15)
+        if (PlayerDataManager.Instance.RangeLevel >= Constants.MAX_MINING_RANGE)
         {
-
             RangeText.text  = "LevelMAX";
             RangeLevelText.color = new Color32(255, 255, 0, 255);
             RangeLevelText.text = "採掘範囲 LvMAX";
