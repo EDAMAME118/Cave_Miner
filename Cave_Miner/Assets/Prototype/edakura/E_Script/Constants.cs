@@ -20,7 +20,7 @@ public static class Constants
     //移動速度
     public const int   MAX_MOVE_SPEED = 60;                 //移動速度の最大レベル
     public const float MOVE_SPEED_UPGRADE_VALUE = 0.1f;     //移動速度の上昇値
-    public const float MOVE_SPEED_COST_INCREASE_RATE = 0.2f;//必要コストにかける値
+    public const float MOVE_SPEED_COST_INCREASE_RATE = 0.1f;//必要コストにかける値
 
     //強化時各種強化レベルに加算される値
     public const int   LEVEL_ADD = 1;
