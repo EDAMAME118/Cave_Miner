@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/E_TitleScene.unity
     guid: b6ca32bd3a8d29d4490fdb96f797a983
   - enabled: 1
+    path: Assets/Prototype/edakura/TutorialScene.unity
+    guid: 75ef3d796f8626448b95459daf5e9128
+  - enabled: 1
     path: Assets/Prototype/edakura/E_StageSelect.unity
     guid: b90015a97ac401b4bb8c3e9b0da29f45
   - enabled: 1
