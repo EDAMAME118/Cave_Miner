@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Prototype/yuton/Y_CaveStage0.unity
     guid: 557be1b14c39cb54a9369966fba6af89
   - enabled: 1
-    path: Assets/Prototype/yuton/Y_CaveStage01.unity
+    path: Assets/Prototype/yuton/Y_test.unity
     guid: d2315d1f7fd16ca4c9191b38361af8a1
   - enabled: 1
     path: Assets/Prototype/yuton/Y_CaveStage03.unity
