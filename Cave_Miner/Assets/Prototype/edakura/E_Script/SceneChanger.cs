@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
+    
+
     //ˆÚ“®æ‚ÌƒV[ƒ“‚ğUnity‚©‚çİ’è‚·‚éw
     [SerializeField]
     private string sceneName;

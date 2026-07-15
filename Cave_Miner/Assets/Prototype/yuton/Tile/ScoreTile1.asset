@@ -37,3 +37,4 @@ MonoBehaviour:
   scoreValue: 50000
   mining_soeed: 15
   typeName: Diamond
+  breakPerticle: {fileID: 5876248476935593079, guid: 9220536444ed3a940bbc3fa319ab9b54, type: 3}

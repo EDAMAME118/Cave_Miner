@@ -37,3 +37,4 @@ MonoBehaviour:
   scoreValue: 1500
   mining_soeed: 5
   typeName: Iron
+  breakPerticle: {fileID: 5876248476935593079, guid: 9e49c2c3fa61aea41a6dfa01a89732fb, type: 3}

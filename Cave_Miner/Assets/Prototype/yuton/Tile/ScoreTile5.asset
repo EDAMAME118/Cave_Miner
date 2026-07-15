@@ -37,3 +37,4 @@ MonoBehaviour:
   scoreValue: 500
   mining_soeed: 2.5
   typeName: Copper
+  breakPerticle: {fileID: 5876248476935593079, guid: 076b7f9148e67f4419fdfce5de641920, type: 3}

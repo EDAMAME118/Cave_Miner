@@ -9,4 +9,5 @@ public class ScoreTile : Tile
     public int scoreValue; // このタイルのスコア
     public float mining_soeed;//耐久値
     public string typeName; // 種別の名前（"Grass", "Water" など）
+    public GameObject breakPerticle;
 }

@@ -37,3 +37,4 @@ MonoBehaviour:
   scoreValue: 200
   mining_soeed: 8
   typeName: 
+  breakPerticle: {fileID: 5876248476935593079, guid: 628ee51a845da6c459446ffad62ff25f, type: 3}

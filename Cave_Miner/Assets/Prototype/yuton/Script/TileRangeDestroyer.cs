@@ -135,11 +135,15 @@ public class TileRangeDestroyer : MonoBehaviour
                         // タイルの中央座標を取得
                         Vector3 worldPos = targetTilemap.GetCellCenterWorld(targetPos);
 
-                        // パーティクル生成
-                        Instantiate(
-                            breakParticlePrefab,
-                            worldPos,
-                            Quaternion.identity);
+                        if (tile is ScoreTile perticle)
+                        {
+                            // パーティクル生成
+                            Instantiate(
+                                perticle.breakPerticle,
+                                worldPos,
+                                Quaternion.identity);
+                        }
+
 
                         // --- スコア加算処理 ---
                         if (tile is ScoreTile destroyedScoreTile)
