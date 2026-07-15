@@ -144,7 +144,6 @@ public class TileRangeDestroyer : MonoBehaviour
                                 Quaternion.identity);
                         }
 
-
                         // --- スコア加算処理 ---
                         if (tile is ScoreTile destroyedScoreTile)
                         {
