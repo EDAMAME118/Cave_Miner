@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 55829390}
   - component: {fileID: 55829389}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: Heading
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Text
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.18970656, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -347,7 +347,7 @@ GameObject:
   - component: {fileID: 1083470804}
   - component: {fileID: 1083470803}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: TutorialText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -369,8 +369,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000020981, y: 32}
-  m_SizeDelta: {x: 1067.4106, y: 220.2635}
+  m_AnchoredPosition: {x: 0.000020981, y: 23}
+  m_SizeDelta: {x: 1067.4106, y: 254.5657}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1083470803
 MonoBehaviour:
@@ -405,7 +405,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u77E2\u5370\u30AD\u30FC\uFF1A\u79FB\u52D5\nZ\uFF1A\u63A1\u6398"
+  m_Text: "\u77E2\u5370\u30AD\u30FC\uFF1A\u79FB\u52D5\n\nZ\uFF1A\u63A1\u6398"
 --- !u!222 &1083470804
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -550,7 +550,7 @@ GameObject:
   - component: {fileID: 1841921668}
   - component: {fileID: 1841921667}
   m_Layer: 5
-  m_Name: Text (Legacy) (1)
+  m_Name: EnterText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
