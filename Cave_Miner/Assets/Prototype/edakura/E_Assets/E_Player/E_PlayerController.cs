@@ -55,29 +55,33 @@ public class E_PlayerController : MonoBehaviour
             //Debug.Log("âEà⁄ìÆ");
             transform.rotation = Quaternion.Euler(0, 0, 90);
             //âE
-            dir = 3;
+            //dir = 3;
         }
         else if (PlayerVector.x < 0.0f)
         {
             //Debug.Log("ç∂à⁄ìÆ");
             transform.rotation = Quaternion.Euler(0, 0, -90);
             //ç∂
-            dir = 1;
+            //dir = 1;
         }
         else if (PlayerVector.y > 0.0f)
         {
             //Debug.Log("è„à⁄ìÆ");
             transform.rotation = Quaternion.Euler(0, 0, -180);
             //è„
-            dir = 2;
+            //dir = 0;
         }
         else if (PlayerVector.y < 0.0f)
         {
             //Debug.Log("â∫à⁄ìÆ");
             transform.rotation = Quaternion.Euler(0, 0, 0);
             //â∫
-            dir = 0;
+            //dir = 2;
         }
+        //else
+        //{
+        //    dir = 4;
+        //}
         if (dir != direction)
         {
             direction = dir;
