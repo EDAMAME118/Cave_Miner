@@ -129,8 +129,13 @@ public class TileRangeDestroyer : MonoBehaviour
                     {
                         // タイルを破壊
                         targetTilemap.SetTile(targetPos, null);
-                        //タイル破壊SE
-                        audiosource.PlayOneShot(breakClip);
+
+                        if (tile is ScoreTile Clip)
+                        {
+                            //タイル破壊SE
+                            audiosource.PlayOneShot(Clip.breakClip);
+                        }
+                        
 
                         // タイルの中央座標を取得
                         Vector3 worldPos = targetTilemap.GetCellCenterWorld(targetPos);

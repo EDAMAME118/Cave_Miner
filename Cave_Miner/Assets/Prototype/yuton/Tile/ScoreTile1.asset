@@ -38,3 +38,4 @@ MonoBehaviour:
   mining_soeed: 15
   typeName: Diamond
   breakPerticle: {fileID: 5876248476935593079, guid: 9220536444ed3a940bbc3fa319ab9b54, type: 3}
+  breakClip: {fileID: 8300000, guid: 3072d42dd3805c146a09bde1663cab76, type: 3}

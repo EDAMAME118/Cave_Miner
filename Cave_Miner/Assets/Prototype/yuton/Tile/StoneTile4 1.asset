@@ -38,3 +38,4 @@ MonoBehaviour:
   mining_soeed: 2
   typeName: 
   breakPerticle: {fileID: 5876248476935593079, guid: 84251877bb534f64ba25aee87c4aa800, type: 3}
+  breakClip: {fileID: 8300000, guid: 3072d42dd3805c146a09bde1663cab76, type: 3}
