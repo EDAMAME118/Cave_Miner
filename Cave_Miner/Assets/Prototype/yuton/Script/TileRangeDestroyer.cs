@@ -6,6 +6,12 @@ using UnityEngine.UI;
 
 public class TileRangeDestroyer : MonoBehaviour
 {
+    //鉱石の値段表示用
+    [SerializeField] private Text oreScoreText;
+    //鉱石の値段テキストの表示制御用
+    private float oreTextInterval = 0.0f;
+    private float displayDuration = 2.0f;
+
     //SE
     AudioSource audiosource;
     [SerializeField] private AudioClip[] digClip;//採掘音 
@@ -41,6 +47,9 @@ public class TileRangeDestroyer : MonoBehaviour
 
         // 最初はゲージを空にしておく
         if (gaugeFillImage != null) gaugeFillImage.fillAmount = 0f;
+
+        //値段表示テキストをからにしておく（掘るまで表示しない）
+        oreScoreText.text = "";
     }
 
     public void DestroyTilesInBounds()
@@ -132,6 +141,9 @@ public class TileRangeDestroyer : MonoBehaviour
 
                         if (tile is ScoreTile Clip)
                         {
+                            //値段を表示
+                            ShowNotify($"{Clip.scoreValue}円獲得");
+                            
                             //タイル破壊SE
                             audiosource.PlayOneShot(Clip.breakClip);
                         }
@@ -224,13 +236,33 @@ public class TileRangeDestroyer : MonoBehaviour
             {
                 gaugeFillImage.fillAmount = 0f;
             }
-        } 
-        
+        }
+
+        //通知テキストのカウントダウン処理
+        if (oreTextInterval > 0)
+        {
+            oreTextInterval -= Time.deltaTime;
+            if (oreTextInterval <= 0)
+            {
+                oreScoreText.text = ""; // 時間が来たら消す
+            }
+        }
+
 
         // デバッグ用隠しコマンド
         if (Keyboard.current.f1Key.isPressed && Keyboard.current.f2Key.isPressed && Keyboard.current.enterKey.isPressed)
         {
             ScoreManager.Instance.score = 777777777;
         }
+    }
+
+    /// <summary>
+    /// 鉱石値段表示用
+    /// </summary>
+    /// <param name="NText"></param>
+    void ShowNotify(string NText)
+    {
+        oreScoreText.text = NText;
+        oreTextInterval = displayDuration;
     }
 }

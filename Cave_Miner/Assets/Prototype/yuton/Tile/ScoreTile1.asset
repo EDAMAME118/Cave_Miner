@@ -34,7 +34,7 @@ MonoBehaviour:
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
   m_ColliderType: 1
-  scoreValue: 50000
+  scoreValue: 30000
   mining_soeed: 15
   typeName: Diamond
   breakPerticle: {fileID: 5876248476935593079, guid: 9220536444ed3a940bbc3fa319ab9b54, type: 3}
