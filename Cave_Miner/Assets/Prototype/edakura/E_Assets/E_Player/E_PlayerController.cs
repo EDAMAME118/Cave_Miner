@@ -18,9 +18,10 @@ public class E_PlayerController : MonoBehaviour
 
     [SerializeField]
     float currentSpeed;
+    [SerializeField] private Transform MiningRange;
 
     public static Vector2 miningRange;
-    public static Vector2 miningRangeOffset;
+    public static Vector2 miningRangeOffset; 
 
     //足音用
     AudioSource audioSource;
@@ -44,6 +45,8 @@ public class E_PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    
+
         //MoveActionの値を読み込んでPlayerVectorに入れる
         PlayerVector = MoveAction.ReadValue<Vector2>();
 
@@ -53,39 +56,59 @@ public class E_PlayerController : MonoBehaviour
         if (PlayerVector.x > 0.0f)
         {
             //Debug.Log("右移動");
-            transform.rotation = Quaternion.Euler(0, 0, 90);
+            //transform.rotation = Quaternion.Euler(0, 0,-90);
             //右
-            //dir = 3;
+            dir = 3;
         }
         else if (PlayerVector.x < 0.0f)
         {
             //Debug.Log("左移動");
-            transform.rotation = Quaternion.Euler(0, 0, -90);
+            //transform.rotation = Quaternion.Euler(0, 0, 90);
             //左
-            //dir = 1;
+            dir = 1;
         }
         else if (PlayerVector.y > 0.0f)
         {
             //Debug.Log("上移動");
-            transform.rotation = Quaternion.Euler(0, 0, -180);
+            //transform.rotation = Quaternion.Euler(0, 0, 180);
             //上
-            //dir = 0;
+            dir = 0;
         }
         else if (PlayerVector.y < 0.0f)
         {
             //Debug.Log("下移動");
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+            //transform.rotation = Quaternion.Euler(0, 0, 0);
             //下
-            //dir = 2;
+            dir = 2;
         }
-        //else
-        //{
-        //    dir = 4;
-        //}
+        else
+        {
+         
+            dir = 4;
+        }
         if (dir != direction)
         {
             direction = dir;
             animator.SetInteger("Direction", direction);
+
+            switch (direction)
+            {
+                case 0: // 上
+                    MiningRange.localPosition = new Vector3(0, 1f, 0);
+                    break;
+
+                case 1: // 左
+                    MiningRange.localPosition = new Vector3(-1f, 0, 0);
+                    break;
+
+                case 2: // 下
+                    MiningRange.localPosition = new Vector3(0, -1f, 0);
+                    break;
+
+                case 3: // 右
+                    MiningRange.localPosition = new Vector3(-1f, 0, 0);
+                    break;
+            }
         }
 
         //プレイヤーが移動している場合
