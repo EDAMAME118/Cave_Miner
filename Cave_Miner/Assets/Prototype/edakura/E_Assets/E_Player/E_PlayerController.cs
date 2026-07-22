@@ -62,13 +62,13 @@ public class E_PlayerController : MonoBehaviour
         currentSpeed = PlayerDataManager.Instance.playerSpeed;
         
         //Œü‚«‚Ì’²®
-        if (PlayerVector.x > 0.0f)
+        if (PlayerVector.x < 0.0f)
         {
             //Debug.Log("‰EˆÚ“®");
             transform.rotation = Quaternion.Euler(0, 0,-90);
             
         }
-        else if (PlayerVector.x < 0.0f)
+        else if (PlayerVector.x > 0.0f)
         {
             //Debug.Log("¶ˆÚ“®");
             transform.rotation = Quaternion.Euler(0, 0, 90);
