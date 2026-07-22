@@ -19,8 +19,8 @@ public class E_PlayerController : MonoBehaviour
     float currentSpeed;
     [SerializeField] private Transform MiningRange;
 
-    //public static Vector2 miningRange;
-    //public static Vector2 miningRangeOffset; 
+    public static Vector2 miningRange;
+    public static Vector2 miningRangeOffset;
 
     //‘«‰¹—p
     AudioSource audioSource;
