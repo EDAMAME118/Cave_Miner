@@ -9,7 +9,6 @@ public class E_PlayerController : MonoBehaviour
 
     public InputAction MoveAction;
     public InputAction DigAction;
-    Animator animator;
     bool isMoveing = false;
     int direction = 0;
 
@@ -28,6 +27,13 @@ public class E_PlayerController : MonoBehaviour
     [SerializeField] AudioClip walkClip;
     [SerializeField] private float walkAudioDelay = 0.0f;
 
+    //アニメーション用
+    Animator animator;
+    public string stopAnime = "PlayerStop";
+    public string moveAnime = "PlayerWalk";
+    public string nowAnime = "";
+    public string oldAnime = "";
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -40,77 +46,46 @@ public class E_PlayerController : MonoBehaviour
         DigAction.Enable();
         
         currentSpeed = 0.0f;
+
+        animator = this.GetComponent<Animator>();
+        nowAnime = stopAnime;       //停止から開始
+        oldAnime = stopAnime;       //停止から開始
     }
 
     // Update is called once per frame
     void Update()
     {
     
-
         //MoveActionの値を読み込んでPlayerVectorに入れる
         PlayerVector = MoveAction.ReadValue<Vector2>();
 
         currentSpeed = PlayerDataManager.Instance.playerSpeed;
-        int dir=0;
+        
         //向きの調整
         if (PlayerVector.x > 0.0f)
         {
             //Debug.Log("右移動");
-            //transform.rotation = Quaternion.Euler(0, 0,-90);
-            //右
-            dir = 3;
+            transform.rotation = Quaternion.Euler(0, 0,-90);
+            
         }
         else if (PlayerVector.x < 0.0f)
         {
             //Debug.Log("左移動");
-            //transform.rotation = Quaternion.Euler(0, 0, 90);
-            //左
-            dir = 1;
+            transform.rotation = Quaternion.Euler(0, 0, 90);
+
         }
         else if (PlayerVector.y > 0.0f)
         {
             //Debug.Log("上移動");
-            //transform.rotation = Quaternion.Euler(0, 0, 180);
-            //上
-            dir = 0;
+            transform.rotation = Quaternion.Euler(0, 0, 180);
+           
         }
         else if (PlayerVector.y < 0.0f)
         {
             //Debug.Log("下移動");
-            //transform.rotation = Quaternion.Euler(0, 0, 0);
-            //下
-            dir = 2;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+          
         }
-        else
-        {
-         
-            dir = 4;
-        }
-        if (dir != direction)
-        {
-            direction = dir;
-            animator.SetInteger("Direction", direction);
-
-            switch (direction)
-            {
-                case 0: // 上
-                    MiningRange.localPosition = new Vector3(0, 1f, 0);
-                    break;
-
-                case 1: // 左
-                    MiningRange.localPosition = new Vector3(-1f, 0, 0);
-                    break;
-
-                case 2: // 下
-                    MiningRange.localPosition = new Vector3(0, -1f, 0);
-                    break;
-
-                case 3: // 右
-                    MiningRange.localPosition = new Vector3(-1f, 0, 0);
-                    break;
-            }
-        }
-
         //プレイヤーが移動している場合
         if (PlayerVector != Vector2.zero)
         {
@@ -135,6 +110,22 @@ public class E_PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //アニメーション更新
+        if (PlayerVector.x == 0.0f && PlayerVector.y == 0.0f)
+        {
+            nowAnime = stopAnime;
+        }
+        else
+        {
+            nowAnime = moveAnime;
+        }
+
+        if (nowAnime != oldAnime)
+        {
+            oldAnime = nowAnime;
+            animator.Play(nowAnime);
+        }
+
         //Rigidbodyに速度入れる
         rbody.linearVelocity = PlayerVector * currentSpeed;
     }
