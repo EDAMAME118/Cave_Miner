@@ -259,6 +259,11 @@ public class TileRangeDestroyer : MonoBehaviour
         {
             ScoreManager.Instance.score = 777777777;
         }
+
+        if(this.gameObject.activeSelf == false)
+        {
+            this.gameObject.SetActive(true);
+        }
     }
 
     /// <summary>
