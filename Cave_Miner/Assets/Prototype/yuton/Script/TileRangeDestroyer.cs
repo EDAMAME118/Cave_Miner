@@ -37,13 +37,18 @@ public class TileRangeDestroyer : MonoBehaviour
     private Dictionary<Vector3Int, float> digProgress = new Dictionary<Vector3Int, float>();
 
     public Dictionary<Vector3Int, float> DigProgress => digProgress;
+
+    private void Awake()
+    {
+        destroyRange = GetComponent<Transform>();
+        destroyRange.localScale = PlayerDataManager.Instance.miningRange;
+        destroyRange.localPosition = PlayerDataManager.Instance.miningRangeOffset;
+    }
     void Start()
     {
         audiosource = GetComponent<AudioSource>();
 
-        destroyRange = GetComponent<Transform>();
-        destroyRange.localScale = PlayerDataManager.Instance.miningRange;
-        destroyRange.localPosition = PlayerDataManager.Instance.miningRangeOffset;
+
 
         // 最初はゲージを空にしておく
         if (gaugeFillImage != null) gaugeFillImage.fillAmount = 0f;

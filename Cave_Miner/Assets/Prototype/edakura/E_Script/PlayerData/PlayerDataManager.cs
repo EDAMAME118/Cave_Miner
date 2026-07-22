@@ -38,8 +38,8 @@ public class PlayerDataManager : MonoBehaviour
     //現在選択中のステージ
     public Stage currentStage = Stage.STAGE1;
 
-    public Vector2 miningRange = Vector2.zero;
-    public Vector2 miningRangeOffset = Vector2.zero;
+    public Vector2 miningRange = new Vector2(0.7f, 0.7f);
+    public Vector2 miningRangeOffset = new Vector2(0, -1f);
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
