@@ -48,13 +48,16 @@ public class TileRangeDestroyer : MonoBehaviour
     {
         audiosource = GetComponent<AudioSource>();
 
-
-
         // 最初はゲージを空にしておく
         if (gaugeFillImage != null) gaugeFillImage.fillAmount = 0f;
 
         //値段表示テキストをからにしておく（掘るまで表示しない）
         oreScoreText.text = "";
+
+        if (this.gameObject.activeSelf == false)
+        {
+            this.gameObject.SetActive(true);
+        }
     }
 
     public void DestroyTilesInBounds()
@@ -260,10 +263,7 @@ public class TileRangeDestroyer : MonoBehaviour
             ScoreManager.Instance.score = 777777777;
         }
 
-        if(this.gameObject.activeSelf == false)
-        {
-            this.gameObject.SetActive(true);
-        }
+
     }
 
     /// <summary>
