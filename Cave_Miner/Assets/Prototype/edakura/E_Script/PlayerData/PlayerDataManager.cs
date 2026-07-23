@@ -38,6 +38,7 @@ public class PlayerDataManager : MonoBehaviour
         {
             // ‚·‚Å‚É‘¶İ‚·‚éê‡‚ÍAd•¡‚µ‚Ä‚¢‚é©•ª‚ğ”jŠü
             Destroy(gameObject);
+            return;
         }
 
         playerDigSpeed = 1.0f;
