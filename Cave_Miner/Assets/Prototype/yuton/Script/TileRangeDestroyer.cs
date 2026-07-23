@@ -45,7 +45,8 @@ public class TileRangeDestroyer : MonoBehaviour
         destroyRange.localPosition = PlayerDataManager.Instance.miningRangeOffset;
     }
     void Start()
-    {
+    { 
+        
         audiosource = GetComponent<AudioSource>();
 
         // 最初はゲージを空にしておく
