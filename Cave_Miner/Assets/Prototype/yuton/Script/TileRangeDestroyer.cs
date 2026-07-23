@@ -38,15 +38,11 @@ public class TileRangeDestroyer : MonoBehaviour
 
     public Dictionary<Vector3Int, float> DigProgress => digProgress;
 
-    private void Awake()
+    void Start()
     {
         destroyRange = GetComponent<Transform>();
         destroyRange.localScale = PlayerDataManager.Instance.miningRange;
         destroyRange.localPosition = PlayerDataManager.Instance.miningRangeOffset;
-    }
-    void Start()
-    { 
-        
         audiosource = GetComponent<AudioSource>();
 
         // 最初はゲージを空にしておく
